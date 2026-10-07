@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOUSE & HEIR | Craftsmanship. Beyond Generations.</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            ivory: '#FBF9F5',
+                            beige: '#F3EFE6',
+                            sand: '#E6E0D2',
+                            charcoal: '#1A1817',
+                            brown: '#2C221E',
+                            gold: '#C5A059',
+                            goldDark: '#9A7B3E',
+                            mutedGold: '#D4AF37'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Scrollbar & Utility Classes */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #1A1817; }
+        ::-webkit-scrollbar-thumb { background: #2C221E; }
+        ::-webkit-scrollbar-thumb:hover { background: #C5A059; }
+
+        .backdrop-blur-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .deconstruct-point {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .deconstruct-point:hover {
+            transform: scale(1.2);
+        }
+
+        .cinematic-fade-in {
+            animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism Refinements */
+        .luxury-card {
+            background: rgba(251, 249, 245, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+        }
+
+        .dark-luxury-card {
+            background: rgba(26, 24, 23, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-brand-ivory text-brand-charcoal font-sans antialiased selection:bg-brand-gold selection:text-white relative">
+
+    <!-- ========================================== -->
+    <!-- 1. MANDATORY ENTRY / ACCESS GATEKEEPER    -->
+    <!-- ========================================== -->
+    <div id="entry-gatekeeper" class="fixed inset-0 z-[100] bg-brand-charcoal text-brand-ivory flex flex-col justify-between p-6 md:p-12 transition-all duration-1000 ease-in-out">
+        <!-- Top Branding -->
+        <div class="text-center pt-8">
+            <h1 class="font-serif text-3xl md:text-5xl tracking-[0.25em] text-brand-ivory uppercase">House & Heir</h1>
+            <p class="text-xs md:text-sm tracking-[0.3em] text-brand-gold mt-2 uppercase">Craftsmanship. Beyond Generations.</p>
+        </div>
+
+        <!-- Entry Form Container -->
+        <div class="max-w-md w-full mx-auto bg-brand-brown/40 border border-brand-gold/20 p-8 md:p-10 my-auto shadow-2xl backdrop-blur-md">
+            <div class="text-center mb-8">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold block mb-2">Private Access</span>
+                <h2 class="font-serif text-xl md:text-2xl tracking-widest uppercase">Enter The House</h2>
+                <p class="text-xs text-brand-ivory/60 mt-1">Provide your credentials to experience our architectural garments.</p>
+            </div>
+
+            <form id="entry-form" onsubmit="handleCustomerEntry(event)" class="space-y-6">
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Full Name</label>
+                    <input type="text" id="entry-name" placeholder="E.g. Julian Vance" class="w-full bg-brand-charcoal/80 border border-brand-gold/30 px-4 py-3 text-sm text-brand-ivory placeholder-brand-ivory/30 focus:outline-none focus:border-brand-gold transition-colors">
+                    <p id="err-name" class="text-[11px] text-red-400 mt-1 hidden">Please provide your full name.</p>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Email Address</label>
+                    <input type="email" id="entry-email" placeholder="julian@houseandheir.com" class="w-full bg-brand-charcoal/80 border border-brand-gold/30 px-4 py-3 text-sm text-brand-ivory placeholder-brand-ivory/30 focus:outline-none focus:border-brand-gold transition-colors">
+                    <p id="err-email" class="text-[11px] text-red-400 mt-1 hidden">Please enter a valid email address.</p>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2">Mobile Number</label>
+                    <input type="tel" id="entry-mobile" placeholder="+91 98765 43210" class="w-full bg-brand-charcoal/80 border border-brand-gold/30 px-4 py-3 text-sm text-brand-ivory placeholder-brand-ivory/30 focus:outline-none focus:border-brand-gold transition-colors">
+                    <p id="err-mobile" class="text-[11px] text-red-400 mt-1 hidden">Please enter a valid 10-digit mobile number.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-gold hover:bg-brand-goldDark text-brand-charcoal font-semibold uppercase tracking-[0.2em] text-xs py-4 transition-all duration-300 mt-4 flex items-center justify-center space-x-2 group">
+                    <span>Unlock House Access</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="text-center pb-4">
+            <p class="text-[10px] tracking-[0.2em] text-brand-ivory/40 uppercase">Tamil Nadu &bull; Global Ambition</p>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. MAIN WEBSITE HEADER / NAVIGATION       -->
+    <!-- ========================================== -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 py-6 px-6 md:px-12 backdrop-blur-nav border-b border-brand-charcoal/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Left: Mobile Menu Button & Primary Nav Links -->
+            <div class="flex items-center space-x-8">
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-brand-charcoal hover:text-brand-gold transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+                
+                <nav class="hidden lg:flex items-center space-x-8 text-xs tracking-[0.2em] uppercase font-medium">
+                    <a href="#new-arrivals" class="hover:text-brand-gold transition-colors">New Arrivals</a>
+                    <a href="#shop" class="hover:text-brand-gold transition-colors">Shop Shirts</a>
+                    <a href="#collections" class="hover:text-brand-gold transition-colors">Collections</a>
+                    <a href="#craftsmanship" class="hover:text-brand-gold transition-colors">The Craft</a>
+                    <a href="#about" class="hover:text-brand-gold transition-colors">About</a>
+                </nav>
+            </div>
+
+            <!-- Center: Brand Logo -->
+            <a href="#" class="text-center">
+                <span class="font-serif text-2xl md:text-3xl tracking-[0.2em] uppercase font-semibold text-brand-charcoal block">House & Heir</span>
+                <span class="text-[9px] tracking-[0.25em] text-brand-gold uppercase block -mt-1 hidden md:block">Craftsmanship. Beyond Generations.</span>
+            </a>
+
+            <!-- Right: Secondary Nav / Actions -->
+            <div class="flex items-center space-x-5 md:space-x-7">
+                <button onclick="toggleSearch()" class="hover:text-brand-gold transition-colors">
+                    <i data-lucide="search" class="w-5 h-5"></i>
+                </button>
+                <button onclick="openAccountDrawer()" class="hover:text-brand-gold transition-colors relative" title="Account">
+                    <i data-lucide="user" class="w-5 h-5"></i>
+                </button>
+                <button onclick="openWishlistDrawer()" class="hover:text-brand-gold transition-colors relative">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    <span id="wishlist-count" class="absolute -top-1 -right-2 bg-brand-gold text-brand-charcoal text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center opacity-0 transition-opacity">0</span>
+                </button>
+                <button onclick="openCartDrawer()" class="hover:text-brand-gold transition-colors relative flex items-center space-x-1">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="bg-brand-charcoal text-brand-ivory text-[10px] font-medium rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE FULLSCREEN NAVIGATION -->
+    <div id="mobile-menu" class="fixed inset-0 bg-brand-charcoal z-50 text-brand-ivory transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col justify-between p-8">
+        <div class="flex justify-between items-center">
+            <span class="font-serif tracking-widest text-lg">HOUSE & HEIR</span>
+            <button onclick="toggleMobileMenu()" class="text-brand-gold"><i data-lucide="x" class="w-8 h-8"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 text-xl font-serif tracking-widest uppercase">
+            <a href="#new-arrivals" onclick="toggleMobileMenu()" class="hover:text-brand-gold transition-colors">New Arrivals</a>
+            <a href="#shop" onclick="toggleMobileMenu()" class="hover:text-brand-gold transition-colors">Printed Shirts</a>
+            <a href="#collections" onclick="toggleMobileMenu()" class="hover:text-brand-gold transition-colors">Collections</a>
+            <a href="#craftsmanship" onclick="toggleMobileMenu()" class="hover:text-brand-gold transition-colors">The Craft & Deconstruction</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="hover:text-brand-gold transition-colors">Our Story</a>
+            <button onclick="toggleAdminPanel(); toggleMobileMenu();" class="text-left text-brand-gold text-sm tracking-widest pt-4 border-t border-brand-gold/20">Internal Management Portal</button>
+        </nav>
+        <div class="text-xs text-brand-ivory/40 tracking-widest uppercase">
+            <p id="mobile-user-greeting">Guest</p>
+            <p class="mt-1">Craftsmanship. Beyond Generations.</p>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. HOMEPAGE HERO EXPERIENCE                -->
+    <!-- ========================================== -->
+    <section class="relative min-h-screen bg-brand-charcoal text-brand-ivory flex items-center justify-center pt-24 overflow-hidden">
+        <!-- Background Editorial Image with subtle Overlay -->
+        <div class="absolute inset-0 z-0 opacity-40 mix-blend-luminosity scale-105 transition-transform duration-10000 ease-out" style="background-image: url('1.png'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-charcoal via-transparent to-brand-charcoal/60"></div>
+
+        <div class="relative z-10 text-center max-w-4xl px-6 my-auto cinematic-fade-in">
+            <span class="text-xs md:text-sm uppercase tracking-[0.4em] text-brand-gold font-medium mb-4 block">The Inaugural Edition</span>
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-[0.15em] uppercase leading-tight font-medium">
+                Craftsmanship.<br>Beyond Generations.
+            </h1>
+            <p class="mt-6 text-sm md:text-base tracking-[0.2em] text-brand-ivory/80 max-w-xl mx-auto font-light uppercase">
+                Built with intention. Designed to endure.
+            </p>
+
+            <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#shop" class="w-full sm:w-auto bg-brand-gold hover:bg-brand-goldDark text-brand-charcoal font-semibold uppercase tracking-[0.2em] text-xs px-8 py-4 transition-all duration-300">
+                    Shop The Collection
+                </a>
+                <a href="#craftsmanship" class="w-full sm:w-auto border border-brand-ivory/30 hover:border-brand-gold text-brand-ivory hover:text-brand-gold uppercase tracking-[0.2em] text-xs px-8 py-4 transition-all duration-300">
+                    Discover The Craft
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 opacity-60">
+            <span class="text-[9px] uppercase tracking-[0.3em] text-brand-ivory">Scroll to Explore</span>
+            <div class="w-[1px] h-8 bg-brand-gold/50 animate-pulse"></div>
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 4. BRAND PHILOSOPHY STATEMENT              -->
+    <!-- ========================================== -->
+    <section class="py-24 px-6 md:px-12 bg-brand-beige border-y border-brand-sand/50">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Our Core Manifesto</span>
+            <h2 class="font-serif text-2xl md:text-4xl leading-relaxed tracking-wide text-brand-charcoal">
+                “We don’t define quality by how it sounds. We define it by how it’s built.”
+            </h2>
+            <div class="w-12 h-[1px] bg-brand-gold mx-auto my-6"></div>
+            <p class="text-sm md:text-base text-brand-charcoal/70 tracking-wider font-light leading-relaxed max-w-2xl mx-auto">
+                House & Heir rejects generic claims of "luxury fabrics" or "premium quality." Every shirt in our atelier is a study in structural integrity—from GSM weight to stitch count per inch.
+            </p>
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 5. SHOPPING & PRODUCT BROWSING EXPERIENCE  -->
+    <!-- ========================================== -->
+    <section id="shop" class="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-brand-charcoal/10">
+            <div>
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-medium block mb-2">Curated Inventory</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-wider text-brand-charcoal uppercase">Architectural Printed Shirts</h2>
+            </div>
+            
+            <!-- Filters & Sort -->
+            <div class="mt-6 md:mt-0 flex flex-wrap items-center gap-4 text-xs tracking-wider uppercase">
+                <button onclick="filterProducts('all')" class="filter-btn active font-semibold text-brand-gold underline underline-offset-8">All Shirts</button>
+                <button onclick="filterProducts('printed')" class="filter-btn hover:text-brand-gold transition-colors">Printed</button>
+                <button onclick="filterProducts('atelier')" class="filter-btn hover:text-brand-gold transition-colors">Atelier Edition</button>
+                <button onclick="filterProducts('essentials')" class="filter-btn hover:text-brand-gold transition-colors">Essentials</button>
+                <select id="sort-select" onchange="sortProducts()" class="bg-transparent border border-brand-charcoal/20 px-3 py-2 text-xs uppercase text-brand-charcoal focus:outline-none ml-auto">
+                    <option value="featured">Sort: Featured</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            <!-- Dynamic JavaScript Hydration -->
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 6. PRODUCT DETAIL EXPERIENCE & DECONSTRUCT -->
+    <!-- ========================================== -->
+    <section id="deconstructed-section" class="py-24 px-6 md:px-12 bg-brand-charcoal text-brand-ivory relative overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-medium block mb-2">Technical Feature Showcase</span>
+                <h2 class="font-serif text-3xl md:text-5xl tracking-widest uppercase">The Garment, Deconstructed</h2>
+                <p class="text-xs md:text-sm text-brand-ivory/60 mt-3 tracking-widest uppercase">Select architectural hotspots to inspect physical construction details.</p>
+            </div>
+
+            <!-- Interactive Garment Stage -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Details / Spec Reader -->
+                <div class="lg:col-span-4 space-y-6 order-2 lg:order-1">
+                    <div id="spec-card" class="dark-luxury-card p-8 border border-brand-gold/30">
+                        <span id="spec-tag" class="text-[10px] uppercase tracking-[0.3em] text-brand-gold font-semibold block mb-1">Specification 01</span>
+                        <h3 id="spec-title" class="font-serif text-2xl tracking-wide uppercase mb-3">240 GSM Combed Cotton</h3>
+                        <p id="spec-desc" class="text-xs text-brand-ivory/70 leading-relaxed font-light">
+                            Dense, durable weave engineered to retain structure after repeated washing cycles without sagging or warping.
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-brand-gold/10 flex items-center justify-between text-xs tracking-widest text-brand-gold">
+                            <span>PRE-SHRUNK FABRIC</span>
+                            <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-brand-brown/30 border border-brand-ivory/10 text-xs tracking-wider space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-brand-ivory/60">STITCH COUNT</span>
+                            <span class="font-semibold text-brand-gold">12 Per Inch</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-brand-ivory/60">PRINT METHOD</span>
+                            <span class="font-semibold text-brand-gold">High-Density Screen</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-brand-ivory/60">SEAM INTEGRITY</span>
+                            <span class="font-semibold text-brand-gold">Reinforced Shoulder</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Garment Visual with Hotspots -->
+                <div class="lg:col-span-8 order-1 lg:order-2 relative flex justify-center">
+                    <div class="relative max-w-lg w-full group">
+                        <img id="deconstruct-img" src="2.png" alt="Deconstructed Garment" class="w-full h-[550px] object-cover filter brightness-95">
+                        
+                        <!-- Hotspot 1: Collar / GSM -->
+                        <button onclick="updateSpec('gsm')" class="deconstruct-point absolute top-[20%] left-[48%] w-6 h-6 rounded-full bg-brand-gold/80 border-2 border-brand-ivory text-brand-charcoal flex items-center justify-center shadow-lg focus:outline-none">
+                            <span class="w-2 h-2 rounded-full bg-brand-charcoal animate-ping"></span>
+                        </button>
+
+                        <!-- Hotspot 2: Shoulder Seam -->
+                        <button onclick="updateSpec('stitch')" class="deconstruct-point absolute top-[28%] left-[28%] w-6 h-6 rounded-full bg-brand-gold/80 border-2 border-brand-ivory text-brand-charcoal flex items-center justify-center shadow-lg focus:outline-none">
+                            <span class="w-2 h-2 rounded-full bg-brand-charcoal animate-ping"></span>
+                        </button>
+
+                        <!-- Hotspot 3: Print Panel -->
+                        <button onclick="updateSpec('print')" class="deconstruct-point absolute top-[50%] left-[55%] w-6 h-6 rounded-full bg-brand-gold/80 border-2 border-brand-ivory text-brand-charcoal flex items-center justify-center shadow-lg focus:outline-none">
+                            <span class="w-2 h-2 rounded-full bg-brand-charcoal animate-ping"></span>
+                        </button>
+
+                        <!-- Hotspot 4: Hem Stitching -->
+                        <button onclick="updateSpec('hem')" class="deconstruct-point absolute bottom-[15%] left-[40%] w-6 h-6 rounded-full bg-brand-gold/80 border-2 border-brand-ivory text-brand-charcoal flex items-center justify-center shadow-lg focus:outline-none">
+                            <span class="w-2 h-2 rounded-full bg-brand-charcoal animate-ping"></span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 7. FABRIC, CONSTRUCTION & PRINT STORY      -->
+    <!-- ========================================== -->
+    <section id="craftsmanship" class="py-24 px-6 md:px-12 bg-brand-ivory max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            <!-- Fabric Story -->
+            <div class="space-y-4">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Material Integrity</span>
+                <h3 class="font-serif text-2xl tracking-wide uppercase">Start With What Touches The Skin</h3>
+                <p class="text-xs text-brand-charcoal/70 leading-relaxed font-light">
+                    Every thread is sourced with exactitude. 240 GSM 100% Combed Cotton treated with pre-shrinkage protocols ensures that the shirt fits the same on day one hundred as day one.
+                </p>
+                <div class="pt-4 border-t border-brand-charcoal/10 text-xs font-semibold tracking-wider text-brand-brown">
+                    100% COMBED COTTON &bull; PRE-SHRUNK
+                </div>
+            </div>
+
+            <!-- Construction Story -->
+            <div class="space-y-4">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Structural Precision</span>
+                <h3 class="font-serif text-2xl tracking-wide uppercase">Built In The Details</h3>
+                <p class="text-xs text-brand-charcoal/70 leading-relaxed font-light">
+                    Reinforced shoulder tape prevents seam distortion. With 12 stitches per inch, our collar, cuffs, and hems resist fraying under stress.
+                </p>
+                <div class="pt-4 border-t border-brand-charcoal/10 text-xs font-semibold tracking-wider text-brand-brown">
+                    12 STITCHES PER INCH &bull; REINFORCED SEAMS
+                </div>
+            </div>
+
+            <!-- Print Story -->
+            <div class="space-y-4">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold">Pigment Longevity</span>
+                <h3 class="font-serif text-2xl tracking-wide uppercase">The Print Should Age With The Garment</h3>
+                <p class="text-xs text-brand-charcoal/70 leading-relaxed font-light">
+                    High-density printing methodology binds deep within the cotton fibers, preventing cracking or peeling over time. No unsupported durability claims—just engineered pigment adhesion.
+                </p>
+                <div class="pt-4 border-t border-brand-charcoal/10 text-xs font-semibold tracking-wider text-brand-brown">
+                    HIGH-DENSITY PRINT &bull; ZERO PEELING
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 8. COLLECTION EDITORIAL PRESENTATION       -->
+    <!-- ========================================== -->
+    <section id="collections" class="py-24 px-6 md:px-12 bg-brand-beige border-t border-brand-sand">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-medium block mb-2">Editorial Storytelling</span>
+                <h2 class="font-serif text-3xl md:text-4xl tracking-widest uppercase">The Placeholder Collections</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Heritage -->
+                <div class="group cursor-pointer" onclick="filterProducts('heritage')">
+                    <div class="relative overflow-hidden mb-4 h-[380px] bg-brand-sand">
+                        <img src="1.png" alt="Heritage Collection" class="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-charcoal/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <h4 class="font-serif text-xl uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">Heritage</h4>
+                    <p class="text-xs text-brand-charcoal/60 mt-1 tracking-wider uppercase">Archival Prints &amp; Classic Fits</p>
+                </div>
+
+                <!-- Atelier -->
+                <div class="group cursor-pointer" onclick="filterProducts('atelier')">
+                    <div class="relative overflow-hidden mb-4 h-[380px] bg-brand-sand">
+                        <img src="2.png" alt="Atelier Collection" class="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-charcoal/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <h4 class="font-serif text-xl uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">Atelier</h4>
+                    <p class="text-xs text-brand-charcoal/60 mt-1 tracking-wider uppercase">Limited Run High-GSM Series</p>
+                </div>
+
+                <!-- Foundation -->
+                <div class="group cursor-pointer" onclick="filterProducts('essentials')">
+                    <div class="relative overflow-hidden mb-4 h-[380px] bg-brand-sand">
+                        <img src="1.png" alt="Foundation Collection" class="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-charcoal/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <h4 class="font-serif text-xl uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">Foundation</h4>
+                    <p class="text-xs text-brand-charcoal/60 mt-1 tracking-wider uppercase">Enduring Monochromatic Cuts</p>
+                </div>
+
+                <!-- Archive -->
+                <div class="group cursor-pointer" onclick="filterProducts('all')">
+                    <div class="relative overflow-hidden mb-4 h-[380px] bg-brand-sand">
+                        <img src="2.png" alt="Archive Collection" class="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-brand-charcoal/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <h4 class="font-serif text-xl uppercase tracking-wider text-brand-charcoal group-hover:text-brand-gold transition-colors">Archive & Origin</h4>
+                    <p class="text-xs text-brand-charcoal/60 mt-1 tracking-wider uppercase">Experimental Structural Prints</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- 9. SHOPPING BAG / CART DRAWER              -->
+    <!-- ========================================== -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <div id="cart-backdrop" onclick="closeCartDrawer()" class="absolute inset-0 bg-brand-charcoal/60 opacity-0 transition-opacity duration-500"></div>
+        
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="cart-panel" class="w-screen max-w-md bg-brand-ivory text-brand-charcoal shadow-2xl p-6 md:p-8 transform translate-x-full transition-transform duration-500 ease-in-out pointer-events-auto flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div>
+                    <div class="flex items-center justify-between pb-6 border-b border-brand-charcoal/10">
+                        <span class="font-serif text-xl uppercase tracking-widest">Shopping Bag</span>
+                        <button onclick="closeCartDrawer()" class="hover:text-brand-gold transition-colors">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+
+                    <!-- Cart Items Container -->
+                    <div id="cart-items" class="mt-6 space-y-6 max-h-[55vh] overflow-y-auto pr-2">
+                        <!-- Dynamic JavaScript Cart Hydration -->
+                    </div>
+                </div>
+
+                <!-- Drawer Footer / Checkout CTA -->
+                <div class="border-t border-brand-charcoal/10 pt-6 space-y-4">
+                    <div class="flex justify-between text-xs tracking-widest uppercase">
+                        <span class="text-brand-charcoal/60">Subtotal</span>
+                        <span id="cart-subtotal" class="font-semibold text-brand-charcoal">₹0</span>
+                    </div>
+                    <div class="flex justify-between text-xs tracking-widest uppercase">
+                        <span class="text-brand-charcoal/60">Complimentary Shipping</span>
+                        <span class="font-semibold text-brand-gold">Included</span>
+                    </div>
+                    <div class="flex justify-between text-sm tracking-widest uppercase pt-2 border-t border-brand-charcoal/5 font-semibold">
+                        <span>Total</span>
+                        <span id="cart-total" class="text-brand-gold">₹0</span>
+                    </div>
+
+                    <button onclick="proceedToCheckout()" class="w-full bg-brand-charcoal hover:bg-brand-brown text-brand-ivory font-semibold uppercase tracking-[0.2em] text-xs py-4 transition-all duration-300">
+                        Proceed to Checkout
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 10. CHECKOUT MODAL JOURNEY                 -->
+    <!-- ========================================== -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 bg-brand-charcoal/80 backdrop-blur-md hidden flex items-center justify-center p-4 md:p-8 overflow-y-auto">
+        <div class="bg-brand-ivory text-brand-charcoal max-w-3xl w-full p-8 md:p-12 border border-brand-gold/30 shadow-2xl relative my-auto">
+            <button onclick="closeCheckoutModal()" class="absolute top-6 right-6 hover:text-brand-gold"><i data-lucide="x" class="w-6 h-6"></i></button>
+
+            <!-- Checkout Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between text-[10px] uppercase tracking-[0.2em] text-brand-gold mb-2 font-semibold">
+                    <span id="step-label-1" class="text-brand-gold">1. Customer Info</span>
+                    <span id="step-label-2" class="text-brand-charcoal/40">2. Delivery Address</span>
+                    <span id="step-label-3" class="text-brand-charcoal/40">3. Payment</span>
+                </div>
+                <div class="w-full bg-brand-sand h-1">
+                    <div id="checkout-progress" class="bg-brand-gold h-1 w-1/3 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Step 1: Customer Review -->
+            <div id="checkout-step-1" class="space-y-6">
+                <h3 class="font-serif text-2xl uppercase tracking-wider">Customer Identification</h3>
+                <div class="bg-brand-beige p-4 text-xs space-y-2 border border-brand-sand">
+                    <p><span class="text-brand-charcoal/60 uppercase tracking-wider">Name:</span> <strong id="co-name">--</strong></p>
+                    <p><span class="text-brand-charcoal/60 uppercase tracking-wider">Email:</span> <strong id="co-email">--</strong></p>
+                    <p><span class="text-brand-charcoal/60 uppercase tracking-wider">Mobile:</span> <strong id="co-mobile">--</strong></p>
+                </div>
+                <button onclick="goToCheckoutStep(2)" class="w-full bg-brand-gold text-brand-charcoal font-semibold uppercase tracking-[0.2em] text-xs py-4">Continue to Delivery</button>
+            </div>
+
+            <!-- Step 2: Delivery Address -->
+            <div id="checkout-step-2" class="space-y-6 hidden">
+                <h3 class="font-serif text-2xl uppercase tracking-wider">Delivery Address</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <input type="text" id="ship-address" placeholder="Street Address" class="bg-transparent border border-brand-charcoal/20 p-3 text-brand-charcoal focus:outline-none col-span-2">
+                    <input type="text" id="ship-city" placeholder="City / Town" class="bg-transparent border border-brand-charcoal/20 p-3 text-brand-charcoal focus:outline-none">
+                    <input type="text" id="ship-state" placeholder="State (e.g., Tamil Nadu)" class="bg-transparent border border-brand-charcoal/20 p-3 text-brand-charcoal focus:outline-none">
+                    <input type="text" id="ship-pin" placeholder="PIN Code" class="bg-transparent border border-brand-charcoal/20 p-3 text-brand-charcoal focus:outline-none col-span-2">
+                </div>
+                <div class="flex space-x-4">
+                    <button onclick="goToCheckoutStep(1)" class="w-1/3 border border-brand-charcoal/30 text-xs uppercase tracking-widest">Back</button>
+                    <button onclick="goToCheckoutStep(3)" class="w-2/3 bg-brand-gold text-brand-charcoal font-semibold uppercase tracking-[0.2em] text-xs py-4">Review &amp; Pay</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Payment & Simulated Gateway -->
+            <div id="checkout-step-3" class="space-y-6 hidden">
+                <h3 class="font-serif text-2xl uppercase tracking-wider">Select Payment Method</h3>
+                <div class="space-y-3 text-xs uppercase tracking-wider">
+                    <label class="flex items-center space-x-3 p-4 border border-brand-charcoal/20 cursor-pointer hover:border-brand-gold">
+                        <input type="radio" name="payment" value="UPI" checked class="accent-brand-gold">
+                        <span>UPI / QR Code (GPay, PhonePe, Paytm)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 border border-brand-charcoal/20 cursor-pointer hover:border-brand-gold">
+                        <input type="radio" name="payment" value="Card" class="accent-brand-gold">
+                        <span>Credit / Debit Card (Visa, Mastercard, Amex)</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-4 border border-brand-charcoal/20 cursor-pointer hover:border-brand-gold">
+                        <input type="radio" name="payment" value="COD" class="accent-brand-gold">
+                        <span>Cash On Delivery</span>
+                    </label>
+                </div>
+
+                <div class="border-t border-brand-charcoal/10 pt-4 flex justify-between text-sm font-semibold tracking-wider">
+                    <span>Grand Total:</span>
+                    <span id="co-grand-total" class="text-brand-gold">₹0</span>
+                </div>
+
+                <button onclick="completePaymentSimulation()" class="w-full bg-brand-charcoal text-brand-ivory font-semibold uppercase tracking-[0.2em] text-xs py-4 hover:bg-brand-brown transition-colors">
+                    Authorize &amp; Complete Order
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 11. ORDER CONFIRMATION SCREEN              -->
+    <!-- ========================================== -->
+    <div id="order-confirmation" class="fixed inset-0 z-50 bg-brand-charcoal text-brand-ivory hidden flex items-center justify-center p-6 overflow-y-auto">
+        <div class="max-w-2xl w-full text-center space-y-6 my-auto cinematic-fade-in border border-brand-gold/30 p-8 md:p-12 bg-brand-brown/30">
+            <i data-lucide="check-circle" class="w-16 h-16 text-brand-gold mx-auto stroke-1"></i>
+            <span class="text-xs uppercase tracking-[0.4em] text-brand-gold block">Order Confirmed</span>
+            <h2 class="font-serif text-3xl md:text-5xl uppercase tracking-widest">Welcome To The House.</h2>
+            <p class="text-xs text-brand-ivory/70 max-w-md mx-auto leading-relaxed">
+                Your order has been crafted into our queue. An invoice and tracking link have been generated for your record.
+            </p>
+
+            <div id="confirmation-details" class="bg-brand-charcoal/80 p-6 border border-brand-gold/20 text-left text-xs space-y-2 font-mono text-brand-ivory/80 my-6">
+                <!-- Hydrated via JS -->
+            </div>
+
+            <button onclick="closeConfirmationAndReset()" class="bg-brand-gold text-brand-charcoal font-semibold uppercase tracking-[0.2em] text-xs px-8 py-4">
+                Return to The Atelier
+            </button>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 12. CUSTOMER ACCOUNT & WISHLIST DRAWERS    -->
+    <!-- ========================================== -->
+    <!-- ACCOUNT DRAWER -->
+    <div id="account-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <div id="account-backdrop" onclick="closeAccountDrawer()" class="absolute inset-0 bg-brand-charcoal/60 opacity-0 transition-opacity duration-500"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="account-panel" class="w-screen max-w-md bg-brand-ivory text-brand-charcoal shadow-2xl p-6 md:p-8 transform translate-x-full transition-transform duration-500 ease-in-out pointer-events-auto flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-6 border-b border-brand-charcoal/10">
+                        <span class="font-serif text-xl uppercase tracking-widest">Customer Profile</span>
+                        <button onclick="closeAccountDrawer()"><i data-lucide="x" class="w-6 h-6"></i></button>
+                    </div>
+
+                    <div id="account-content" class="mt-6 space-y-6">
+                        <!-- Hydrated via JS -->
+                    </div>
+                </div>
+
+                <div class="border-t border-brand-charcoal/10 pt-6">
+                    <button onclick="signOutCustomer()" class="w-full border border-red-800 text-red-800 hover:bg-red-800 hover:text-white font-semibold uppercase tracking-[0.2em] text-xs py-3 transition-colors">
+                        Sign Out / Lock Portal
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WISHLIST DRAWER -->
+    <div id="wishlist-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none">
+        <div id="wishlist-backdrop" onclick="closeWishlistDrawer()" class="absolute inset-0 bg-brand-charcoal/60 opacity-0 transition-opacity duration-500"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div id="wishlist-panel" class="w-screen max-w-md bg-brand-ivory text-brand-charcoal shadow-2xl p-6 md:p-8 transform translate-x-full transition-transform duration-500 ease-in-out pointer-events-auto flex flex-col">
+                <div class="flex items-center justify-between pb-6 border-b border-brand-charcoal/10">
+                    <span class="font-serif text-xl uppercase tracking-widest">Your Wishlist</span>
+                    <button onclick="closeWishlistDrawer()"><i data-lucide="x" class="w-6 h-6"></i></button>
+                </div>
+                <div id="wishlist-items" class="mt-6 space-y-6 overflow-y-auto flex-1">
+                    <!-- Hydrated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 13. SEPARATE INTERNAL ADMIN MANAGEMENT     -->
+    <!-- ========================================== -->
+    <div id="admin-modal" class="fixed inset-0 z-[80] bg-brand-charcoal text-brand-ivory hidden overflow-y-auto p-4 md:p-12">
+        <div class="max-w-7xl mx-auto space-y-8">
+            
+            <!-- Admin Header -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-6 border-b border-brand-gold/20">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.3em] text-brand-gold">Internal Management Dashboard</span>
+                    <h2 class="font-serif text-3xl uppercase tracking-widest mt-1">House &amp; Heir Operations</h2>
+                </div>
+                <button onclick="toggleAdminPanel()" class="mt-4 md:mt-0 bg-brand-gold text-brand-charcoal px-6 py-2 text-xs font-semibold uppercase tracking-widest">
+                    Exit Portal
+                </button>
+            </div>
+
+            <!-- Dashboard Analytics Widgets -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <span class="text-[10px] uppercase tracking-widest text-brand-gold">Total Revenue</span>
+                    <p id="adm-rev" class="font-serif text-2xl md:text-3xl mt-2 text-brand-ivory">₹0</p>
+                </div>
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <span class="text-[10px] uppercase tracking-widest text-brand-gold">Total Orders</span>
+                    <p id="adm-orders" class="font-serif text-2xl md:text-3xl mt-2 text-brand-ivory">0</p>
+                </div>
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <span class="text-[10px] uppercase tracking-widest text-brand-gold">Remaining Stock</span>
+                    <p id="adm-stock" class="font-serif text-2xl md:text-3xl mt-2 text-brand-ivory">0 Units</p>
+                </div>
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <span class="text-[10px] uppercase tracking-widest text-brand-gold">Units Sold</span>
+                    <p id="adm-sold" class="font-serif text-2xl md:text-3xl mt-2 text-brand-ivory">0 Units</p>
+                </div>
+            </div>
+
+            <!-- Inventory Management Table -->
+            <div class="dark-luxury-card p-6 border border-brand-gold/20 overflow-x-auto">
+                <h3 class="font-serif text-xl uppercase tracking-wider mb-4 text-brand-gold">Inventory &amp; Stock Control</h3>
+                <table class="w-full text-left text-xs uppercase tracking-wider">
+                    <thead class="border-b border-brand-gold/20 text-brand-gold">
+                        <tr>
+                            <th class="py-3">Shirt Model</th>
+                            <th class="py-3">SKU</th>
+                            <th class="py-3">Price</th>
+                            <th class="py-3">Current Stock</th>
+                            <th class="py-3">Units Sold</th>
+                            <th class="py-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-inventory-body" class="divide-y divide-brand-gold/10">
+                        <!-- Hydrated via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Orders & Customer Database -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Orders Table -->
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <h3 class="font-serif text-xl uppercase tracking-wider mb-4 text-brand-gold">Recent Orders</h3>
+                    <div id="admin-orders-list" class="space-y-4 text-xs font-mono max-h-80 overflow-y-auto">
+                        <!-- Hydrated via JS -->
+                    </div>
+                </div>
+
+                <!-- Customer Database -->
+                <div class="dark-luxury-card p-6 border border-brand-gold/20">
+                    <h3 class="font-serif text-xl uppercase tracking-wider mb-4 text-brand-gold">Registered House Guests</h3>
+                    <div id="admin-customers-list" class="space-y-4 text-xs font-mono max-h-80 overflow-y-auto">
+                        <!-- Hydrated via JS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 14. FOOTER & BRAND STORY                   -->
+    <!-- ========================================== -->
+    <footer id="about" class="bg-brand-charcoal text-brand-ivory pt-20 pb-12 border-t border-brand-gold/20">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-brand-ivory/10">
+            
+            <!-- Brand Story -->
+            <div class="md:col-span-5 space-y-4">
+                <span class="font-serif text-2xl tracking-[0.2em] uppercase block">House &amp; Heir</span>
+                <p class="text-xs text-brand-gold tracking-[0.25em] uppercase">Craftsmanship. Beyond Generations.</p>
+                <p class="text-xs text-brand-ivory/60 leading-relaxed font-light max-w-sm">
+                    Rooted in Tamil Nadu, designed with global ambition. We engineer printed garments that reject fast-fashion obsolescence through structural precision and transparent construction.
+                </p>
+            </div>
+
+            <!-- Footer Nav -->
+            <div class="md:col-span-2 space-y-3 text-xs uppercase tracking-widest">
+                <span class="text-brand-gold block font-semibold mb-2">Explore</span>
+                <p><a href="#shop" class="hover:text-brand-gold transition-colors">New Arrivals</a></p>
+                <p><a href="#shop" class="hover:text-brand-gold transition-colors">Printed Shirts</a></p>
+                <p><a href="#collections" class="hover:text-brand-gold transition-colors">Collections</a></p>
+                <p><a href="#craftsmanship" class="hover:text-brand-gold transition-colors">The Craft</a></p>
+            </div>
+
+            <!-- Client Service -->
+            <div class="md:col-span-2 space-y-3 text-xs uppercase tracking-widest">
+                <span class="text-brand-gold block font-semibold mb-2">Client Care</span>
+                <p><a href="#" class="hover:text-brand-gold transition-colors">Shipping &amp; Delivery</a></p>
+                <p><a href="#" class="hover:text-brand-gold transition-colors">Returns &amp; Exchanges</a></p>
+                <p><a href="#" class="hover:text-brand-gold transition-colors">Garment Care Guide</a></p>
+                <p><a href="#" class="hover:text-brand-gold transition-colors">Size Assistance</a></p>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="md:col-span-3 space-y-4">
+                <span class="text-xs uppercase tracking-[0.3em] text-brand-gold font-semibold block">Enter The House</span>
+                <p class="text-xs text-brand-ivory/60 font-light">Subscribe for private dispatch notifications and archival drops.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Your email address" class="bg-brand-brown/50 border border-brand-gold/30 px-3 py-2 text-xs text-brand-ivory placeholder-brand-ivory/30 focus:outline-none w-full">
+                    <button class="bg-brand-gold text-brand-charcoal px-4 text-xs font-semibold uppercase">Join</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 pt-8 flex flex-col sm:flex-row justify-between items-center text-[10px] text-brand-ivory/40 uppercase tracking-widest">
+            <p>&copy; 2026 House &amp; Heir. All rights reserved.</p>
+            <p class="mt-2 sm:mt-0">Don't just say premium. Prove it.</p>
+        </div>
+    </footer>
+
+
+    <!-- ========================================== -->
+    <!-- 15. INTERACTIVE JAVASCRIPT ARCHITECTURE    -->
+    <!-- ========================================== -->
+    <script>
+        // --- DATA SYSTEM (INITIAL PRODUCT INVENTORY) ---
+        let products = [
+            {
+                id: 'hh-001',
+                name: 'The Monolith Printed Shirt',
+                price: 4800,
+                category: 'printed',
+                collection: 'heritage',
+                stock: 3,
+                images: ['1.png', '2.png'],
+                fabric: '240 GSM 100% Combed Cotton',
+                stitches: '12 Stitches Per Inch',
+                print: 'High-Density Screen Pigment',
+                description: 'Engineered with structured shoulder reinforcing and archival architectural graphics.'
+            },
+            {
+                id: 'hh-002',
+                name: 'Atelier Geometry Edition',
+                price: 5400,
+                category: 'atelier',
+                collection: 'atelier',
+                stock: 2,
+                images: ['2.png', '1.png'],
+                fabric: '260 GSM Heavyweight Cotton',
+                stitches: '14 Stitches Per Inch',
+                print: 'Deep Adhesion Screen Print',
+                description: 'A heavyweight printed expression designed for structured drape and durability.'
+            },
+            {
+                id: 'hh-003',
+                name: 'Foundation Minimalist Shirt',
+                price: 3900,
+                category: 'essentials',
+                collection: 'essentials',
+                stock: 1,
+                images: ['1.png', '2.png'],
+                fabric: '220 GSM Pre-Shrunk Cotton',
+                stitches: '12 Stitches Per Inch',
+                print: 'Subtle Tonal Pigment',
+                description: 'Essential silhouette built with reinforced seams for everyday longevity.'
+            },
+            {
+                id: 'hh-004',
+                name: 'Origin Graphic Silk-Blend',
+                price: 6200,
+                category: 'printed',
+                collection: 'heritage',
+                stock: 0,
+                images: ['2.png', '1.png'],
+                fabric: '200 GSM Cotton Silk Blend',
+                stitches: '12 Stitches Per Inch',
+                print: 'Precision Reactive Print',
+                description: 'A delicate balance between tactile softness and architectural print bolding.'
+            }
+        ];
+
+        // --- GLOBAL APP STATE ---
+        let currentCustomer = null;
+        let cart = [];
+        let wishlist = [];
+        let orders = [];
+        let customers = [];
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            loadBrowserState();
+            checkGatekeeperStatus();
+            renderProducts(products);
+            updateCartUI();
+            updateWishlistUI();
+            renderAdminDashboard();
+        });
+
+        // --- LOCAL STORAGE STATE MANAGEMENT ---
+        function loadBrowserState() {
+            const savedCust = localStorage.getItem('hh_customer');
+            if (savedCust) currentCustomer = JSON.parse(savedCust);
+
+            const savedCart = localStorage.getItem('hh_cart');
+            if (savedCart) cart = JSON.parse(savedCart);
+
+            const savedWish = localStorage.getItem('hh_wishlist');
+            if (savedWish) wishlist = JSON.parse(savedWish);
+
+            const savedOrders = localStorage.getItem('hh_orders');
+            if (savedOrders) orders = JSON.parse(savedOrders);
+
+            const savedCustomers = localStorage.getItem('hh_customers_db');
+            if (savedCustomers) customers = JSON.parse(savedCustomers);
+
+            const savedProducts = localStorage.getItem('hh_products_db');
+            if (savedProducts) products = JSON.parse(savedProducts);
+        }
+
+        function saveBrowserState() {
+            localStorage.setItem('hh_cart', JSON.stringify(cart));
+            localStorage.setItem('hh_wishlist', JSON.stringify(wishlist));
+            localStorage.setItem('hh_orders', JSON.stringify(orders));
+            localStorage.setItem('hh_customers_db', JSON.stringify(customers));
+            localStorage.setItem('hh_products_db', JSON.stringify(products));
+        }
+
+        // --- GATEKEEPER ACCESS CONTROL ---
+        function checkGatekeeperStatus() {
+            const gatekeeper = document.getElementById('entry-gatekeeper');
+            if (currentCustomer) {
+                gatekeeper.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => gatekeeper.style.display = 'none', 1000);
+                updateUserGreeting();
+            } else {
+                gatekeeper.style.display = 'flex';
+                gatekeeper.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function handleCustomerEntry(e) {
+            e.preventDefault();
+            const name = document.getElementById('entry-name').value.trim();
+            const email = document.getElementById('entry-email').value.trim();
+            const mobile = document.getElementById('entry-mobile').value.trim();
+
+            let isValid = true;
+
+            if (!name) {
+                document.getElementById('err-name').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('err-name').classList.add('hidden');
+            }
+
+            if (!email || !email.includes('@')) {
+                document.getElementById('err-email').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('err-email').classList.add('hidden');
+            }
+
+            if (!mobile || mobile.length < 10) {
+                document.getElementById('err-mobile').classList.remove('hidden');
+                isValid = false;
+            } else {
+                document.getElementById('err-mobile').classList.add('hidden');
+            }
+
+            if (isValid) {
+                currentCustomer = { name, email, mobile, entryTime: new Date().toISOString() };
+                localStorage.setItem('hh_customer', JSON.stringify(currentCustomer));
+
+                // Save to internal customer DB if new
+                if (!customers.find(c => c.email === email)) {
+                    customers.push({ ...currentCustomer, totalOrders: 0, totalSpent: 0 });
+                    saveBrowserState();
+                }
+
+                checkGatekeeperStatus();
+            }
+        }
+
+        function signOutCustomer() {
+            localStorage.removeItem('hh_customer');
+            currentCustomer = null;
+            closeAccountDrawer();
+            checkGatekeeperStatus();
+        }
+
+        function updateUserGreeting() {
+            if (currentCustomer) {
+                document.getElementById('mobile-user-greeting').innerText = `Guest: ${currentCustomer.name}`;
+            }
+        }
+
+
+        // --- PRODUCT GRID & STOCK URGENCY RENDERER ---
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            items.forEach(p => {
+                // Actual Inventory-Based Stock Badge Logic
+                let stockBadge = '';
+                if (p.stock === 0) {
+                    stockBadge = `<span class="bg-brand-charcoal text-white text-[9px] uppercase tracking-widest px-2 py-1 font-semibold">SOLD OUT</span>`;
+                } else if (p.stock === 1) {
+                    stockBadge = `<span class="bg-red-800 text-white text-[9px] uppercase tracking-widest px-2 py-1 font-semibold animate-pulse">ONLY 1 LEFT</span>`;
+                } else if (p.stock === 2) {
+                    stockBadge = `<span class="bg-brand-brown text-brand-gold text-[9px] uppercase tracking-widest px-2 py-1 font-semibold">ONLY 2 LEFT</span>`;
+                } else if (p.stock === 3) {
+                    stockBadge = `<span class="bg-brand-brown text-brand-ivory text-[9px] uppercase tracking-widest px-2 py-1 font-semibold">ONLY 3 LEFT</span>`;
+                } else {
+                    stockBadge = `<span class="bg-brand-sand/60 text-brand-charcoal text-[9px] uppercase tracking-widest px-2 py-1">${p.stock} IN STOCK</span>`;
+                }
+
+                const isWishlisted = wishlist.includes(p.id);
+
+                const card = `
+                    <div class="group relative flex flex-col bg-brand-ivory border border-brand-sand/60 hover:border-brand-gold/50 transition-all duration-500">
+                        <!-- Image Container -->
+                        <div class="relative h-[420px] bg-brand-beige overflow-hidden">
+                            <img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700">
+                            
+                            <div class="absolute top-4 left-4">
+                                ${stockBadge}
+                            </div>
+
+                            <button onclick="toggleWishlist('${p.id}')" class="absolute top-4 right-4 bg-brand-ivory/80 p-2 text-brand-charcoal hover:text-brand-gold transition-colors">
+                                <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-brand-gold text-brand-gold' : ''}"></i>
+                            </button>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="p-6 flex flex-col flex-1 justify-between space-y-4">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-[0.2em] text-brand-gold font-medium block mb-1">${p.fabric}</span>
+                                <h3 class="font-serif text-lg tracking-wide uppercase text-brand-charcoal">${p.name}</h3>
+                                <p class="text-xs text-brand-charcoal/60 mt-1 font-light line-clamp-2">${p.description}</p>
+                            </div>
+
+                            <div class="pt-4 border-t border-brand-sand flex items-center justify-between">
+                                <span class="font-serif text-base text-brand-charcoal">₹${p.price.toLocaleString()}</span>
+                                
+                                ${p.stock > 0 ? `
+                                    <button onclick="addToBag('${p.id}')" class="bg-brand-charcoal hover:bg-brand-gold text-brand-ivory hover:text-brand-charcoal text-[10px] uppercase tracking-[0.2em] px-4 py-2.5 transition-all">
+                                        Add To Bag
+                                    </button>
+                                ` : `
+                                    <button disabled class="bg-brand-sand text-brand-charcoal/40 text-[10px] uppercase tracking-[0.2em] px-4 py-2.5 cursor-not-allowed">
+                                        Unavailable
+                                    </button>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+
+            lucide.createIcons();
+        }
+
+        // --- FILTER & SORT PRODUCTS ---
+        function filterProducts(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('font-semibold', 'text-brand-gold', 'underline', 'underline-offset-8'));
+            if (cat === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === cat || p.collection === cat);
+                renderProducts(filtered);
+            }
+        }
+
+        function sortProducts() {
+            const val = document.getElementById('sort-select').value;
+            let sorted = [...products];
+            if (val === 'low-high') sorted.sort((a,b) => a.price - b.price);
+            if (val === 'high-low') sorted.sort((a,b) => b.price - a.price);
+            renderProducts(sorted);
+        }
+
+
+        // --- GARMENT DECONSTRUCTION INTERACTIVITY ---
+        function updateSpec(type) {
+            const card = document.getElementById('spec-card');
+            const title = document.getElementById('spec-title');
+            const tag = document.getElementById('spec-tag');
+            const desc = document.getElementById('spec-desc');
+
+            card.classList.add('opacity-50');
+
+            setTimeout(() => {
+                if (type === 'gsm') {
+                    tag.innerText = "Specification 01";
+                    title.innerText = "240 GSM Combed Cotton";
+                    desc.innerText = "Heavyweight fabric structural density prevents distortion over repeated laundering. Ultra-smooth surface for pigment retention.";
+                } else if (type === 'stitch') {
+                    tag.innerText = "Specification 02";
+                    title.innerText = "12 Stitches Per Inch";
+                    desc.innerText = "High-density seam reinforced with double-needle lockstitching to resist tension fraying along shoulder seams.";
+                } else if (type === 'print') {
+                    tag.innerText = "Specification 03";
+                    title.innerText = "High-Density Screen Pigment";
+                    desc.innerText = "Pigment forced deep into fiber pores to ensure color saturation that ages gracefully with the garment without cracking.";
+                } else if (type === 'hem') {
+                    tag.innerText = "Specification 04";
+                    title.innerText = "Pre-Shrunk Hem Finish";
+                    desc.innerText = "Pre-washed fabric preparation prevents post-purchase vertical shrinkage, preserving original drop length.";
+                }
+                card.classList.remove('opacity-50');
+            }, 200);
+        }
+
+
+        // --- CART DRAWER LOGIC ---
+        function openCartDrawer() {
+            document.getElementById('cart-drawer').classList.remove('pointer-events-none');
+            document.getElementById('cart-backdrop').classList.add('opacity-100');
+            document.getElementById('cart-panel').classList.remove('translate-x-full');
+        }
+
+        function closeCartDrawer() {
+            document.getElementById('cart-backdrop').classList.remove('opacity-100');
+            document.getElementById('cart-panel').classList.add('translate-x-full');
+            setTimeout(() => {
+                document.getElementById('cart-drawer').classList.add('pointer-events-none');
+            }, 500);
+        }
+
+        function addToBag(id) {
+            const prod = products.find(p => p.id === id);
+            if (!prod || prod.stock <= 0) return;
+
+            const existing = cart.find(c => c.id === id);
+            if (existing) {
+                if (existing.qty < prod.stock) {
+                    existing.qty += 1;
+                } else {
+                    alert(`Maximum available stock reached (${prod.stock} remaining).`);
+                }
+            } else {
+                cart.push({ id: prod.id, name: prod.name, price: prod.price, qty: 1, image: prod.images[0] });
+            }
+
+            saveBrowserState();
+            updateCartUI();
+            openCartDrawer();
+        }
+
+        function updateCartQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            const prod = products.find(p => p.id === id);
+            if (!item) return;
+
+            item.qty += delta;
+            if (item.qty > prod.stock) {
+                item.qty = prod.stock;
+                alert(`Stock limited to ${prod.stock} units.`);
+            }
+
+            if (item.qty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            }
+
+            saveBrowserState();
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+
+            let subtotal = 0;
+            let totalQty = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-xs text-brand-charcoal/50 uppercase tracking-widest text-center py-12">Your shopping bag is empty.</p>`;
+            } else {
+                cart.forEach(c => {
+                    subtotal += c.price * c.qty;
+                    totalQty += c.qty;
+
+                    container.innerHTML += `
+                        <div class="flex space-x-4 border-b border-brand-charcoal/10 pb-4">
+                            <img src="${c.image}" class="w-16 h-20 object-cover bg-brand-beige">
+                            <div class="flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h4 class="font-serif text-sm uppercase">${c.name}</h4>
+                                    <span class="text-xs text-brand-gold font-semibold">₹${c.price.toLocaleString()}</span>
+                                </div>
+                                <div class="flex items-center justify-between text-xs">
+                                    <div class="flex items-center space-x-2 border border-brand-charcoal/20 px-2 py-1">
+                                        <button onclick="updateCartQty('${c.id}', -1)">-</button>
+                                        <span>${c.qty}</span>
+                                        <button onclick="updateCartQty('${c.id}', 1)">+</button>
+                                    </div>
+                                    <button onclick="updateCartQty('${c.id}', -${c.qty})" class="text-red-700 text-[10px] uppercase">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('cart-count').innerText = totalQty;
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal.toLocaleString()}`;
+            document.getElementById('cart-total').innerText = `₹${subtotal.toLocaleString()}`;
+        }
+
+
+        // --- WISHLIST LOGIC ---
+        function toggleWishlist(id) {
+            const idx = wishlist.indexOf(id);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+            } else {
+                wishlist.push(id);
+            }
+            saveBrowserState();
+            updateWishlistUI();
+            renderProducts(products);
+        }
+
+        function updateWishlistUI() {
+            const countEl = document.getElementById('wishlist-count');
+            countEl.innerText = wishlist.length;
+            countEl.style.opacity = wishlist.length > 0 ? '1' : '0';
+
+            const container = document.getElementById('wishlist-items');
+            container.innerHTML = '';
+
+            if (wishlist.length === 0) {
+                container.innerHTML = `<p class="text-xs text-brand-charcoal/50 uppercase tracking-widest text-center py-12">No saved items in wishlist.</p>`;
+            } else {
+                wishlist.forEach(id => {
+                    const p = products.find(prod => prod.id === id);
+                    if (p) {
+                        container.innerHTML += `
+                            <div class="flex items-center justify-between border-b border-brand-charcoal/10 pb-4">
+                                <div class="flex items-center space-x-4">
+                                    <img src="${p.images[0]}" class="w-12 h-16 object-cover">
+                                    <div>
+                                        <h4 class="font-serif text-xs uppercase">${p.name}</h4>
+                                        <span class="text-xs text-brand-gold">₹${p.price.toLocaleString()}</span>
+                                    </div>
+                                </div>
+                                <button onclick="addToBag('${p.id}'); toggleWishlist('${p.id}');" class="bg-brand-charcoal text-brand-ivory text-[9px] uppercase px-3 py-2">Move to Bag</button>
+                            </div>
+                        `;
+                    }
+                });
+            }
+        }
+
+        function openWishlistDrawer() {
+            document.getElementById('wishlist-drawer').classList.remove('pointer-events-none');
+            document.getElementById('wishlist-backdrop').classList.add('opacity-100');
+            document.getElementById('wishlist-panel').classList.remove('translate-x-full');
+        }
+
+        function closeWishlistDrawer() {
+            document.getElementById('wishlist-backdrop').classList.remove('opacity-100');
+            document.getElementById('wishlist-panel').classList.add('translate-x-full');
+            setTimeout(() => document.getElementById('wishlist-drawer').classList.add('pointer-events-none'), 500);
+        }
+
+
+        // --- CUSTOMER ACCOUNT DRAWER ---
+        function openAccountDrawer() {
+            if (!currentCustomer) return;
+            document.getElementById('account-drawer').classList.remove('pointer-events-none');
+            document.getElementById('account-backdrop').classList.add('opacity-100');
+            document.getElementById('account-panel').classList.remove('translate-x-full');
+
+            const content = document.getElementById('account-content');
+            const custOrders = orders.filter(o => o.customerEmail === currentCustomer.email);
+
+            content.innerHTML = `
+                <div class="bg-brand-beige p-4 text-xs space-y-1 border border-brand-sand">
+                    <p class="font-serif text-sm font-semibold">${currentCustomer.name}</p>
+                    <p class="text-brand-charcoal/70">${currentCustomer.email}</p>
+                    <p class="text-brand-charcoal/70">${currentCustomer.mobile}</p>
+                </div>
+
+                <div>
+                    <h4 class="font-serif text-sm uppercase tracking-wider mb-3">Order History (${custOrders.length})</h4>
+                    <div class="space-y-3 max-h-60 overflow-y-auto font-mono text-[11px]">
+                        ${custOrders.length === 0 ? '<p class="text-brand-charcoal/50 text-xs font-sans">No previous orders found.</p>' : ''}
+                        ${custOrders.map(o => `
+                            <div class="p-3 bg-brand-ivory border border-brand-sand">
+                                <div class="flex justify-between font-semibold text-brand-gold">
+                                    <span>${o.id}</span>
+                                    <span>₹${o.amount.toLocaleString()}</span>
+                                </div>
+                                <p class="mt-1 text-brand-charcoal/70">${o.items.map(i => i.name).join(', ')}</p>
+                                <div class="flex justify-between mt-2 text-[10px] text-brand-charcoal/50">
+                                    <span>Status: ${o.status}</span>
+                                    <span>${new Date(o.date).toLocaleDateString()}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function closeAccountDrawer() {
+            document.getElementById('account-backdrop').classList.remove('opacity-100');
+            document.getElementById('account-panel').classList.add('translate-x-full');
+            setTimeout(() => document.getElementById('account-drawer').classList.add('pointer-events-none'), 500);
+        }
+
+
+        // --- CHECKOUT STAGES & ORDER COMPLETION ---
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                alert("Your shopping bag is empty.");
+                return;
+            }
+            if (!currentCustomer) {
+                alert("Please log in first.");
+                return;
+            }
+
+            closeCartDrawer();
+            document.getElementById('co-name').innerText = currentCustomer.name;
+            document.getElementById('co-email').innerText = currentCustomer.email;
+            document.getElementById('co-mobile').innerText = currentCustomer.mobile;
+
+            let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('co-grand-total').innerText = `₹${total.toLocaleString()}`;
+
+            goToCheckoutStep(1);
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function goToCheckoutStep(step) {
+            document.getElementById('checkout-step-1').classList.add('hidden');
+            document.getElementById('checkout-step-2').classList.add('hidden');
+            document.getElementById('checkout-step-3').classList.add('hidden');
+
+            document.getElementById(`checkout-step-${step}`).classList.remove('hidden');
+
+            const progress = document.getElementById('checkout-progress');
+            if (step === 1) progress.style.width = "33%";
+            if (step === 2) progress.style.width = "66%";
+            if (step === 3) progress.style.width = "100%";
+        }
+
+        function completePaymentSimulation() {
+            const payMethod = document.querySelector('input[name="payment"]:checked').value;
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const orderId = 'HH-' + Math.floor(100000 + Math.random() * 900000);
+
+            // Deduct inventory stock
+            cart.forEach(cartItem => {
+                const prod = products.find(p => p.id === cartItem.id);
+                if (prod) {
+                    prod.stock = Math.max(0, prod.stock - cartItem.qty);
+                }
+            });
+
+            const newOrder = {
+                id: orderId,
+                customerName: currentCustomer.name,
+                customerEmail: currentCustomer.email,
+                customerMobile: currentCustomer.mobile,
+                amount: total,
+                paymentMethod: payMethod,
+                status: 'Placed',
+                date: new Date().toISOString(),
+                items: [...cart]
+            };
+
+            orders.push(newOrder);
+
+            // Update Customer Record Spent
+            const cust = customers.find(c => c.email === currentCustomer.email);
+            if (cust) {
+                cust.totalOrders += 1;
+                cust.totalSpent += total;
+            }
+
+            saveBrowserState();
+
+            // Clear Cart & Render Order Confirmation
+            cart = [];
+            updateCartUI();
+            renderProducts(products);
+            renderAdminDashboard();
+
+            closeCheckoutModal();
+
+            // Show Confirmation
+            const confDetails = document.getElementById('confirmation-details');
+            confDetails.innerHTML = `
+                <p>ORDER ID: <span class="text-brand-gold">${newOrder.id}</span></p>
+                <p>CUSTOMER: ${newOrder.customerName} (${newOrder.customerEmail})</p>
+                <p>PAYMENT METHOD: ${newOrder.paymentMethod} (Authorized)</p>
+                <p>AMOUNT PAID: ₹${newOrder.amount.toLocaleString()}</p>
+                <p class="pt-2 border-t border-brand-gold/20 text-brand-gold">DISPATCH: Scheduled via Expedited Tamil Nadu Courier Hub</p>
+            `;
+
+            document.getElementById('order-confirmation').classList.remove('hidden');
+        }
+
+        function closeConfirmationAndReset() {
+            document.getElementById('order-confirmation').classList.add('hidden');
+        }
+
+
+        // --- INTERNAL ADMIN MANAGEMENT SYSTEM ---
+        function toggleAdminPanel() {
+            const modal = document.getElementById('admin-modal');
+            modal.classList.toggle('hidden');
+            renderAdminDashboard();
+        }
+
+        function renderAdminDashboard() {
+            let totalRev = orders.reduce((sum, o) => sum + o.amount, 0);
+            let totalOrdersCount = orders.length;
+            let remainingStock = products.reduce((sum, p) => sum + p.stock, 0);
+            
+            let unitsSold = 0;
+            orders.forEach(o => {
+                o.items.forEach(i => unitsSold += i.qty);
+            });
+
+            document.getElementById('adm-rev').innerText = `₹${totalRev.toLocaleString()}`;
+            document.getElementById('adm-orders').innerText = totalOrdersCount;
+            document.getElementById('adm-stock').innerText = `${remainingStock} Units`;
+            document.getElementById('adm-sold').innerText = `${unitsSold} Units`;
+
+            // Render Inventory Table
+            const invBody = document.getElementById('admin-inventory-body');
+            invBody.innerHTML = '';
+            products.forEach(p => {
+                invBody.innerHTML += `
+                    <tr>
+                        <td class="py-3 font-semibold text-brand-ivory">${p.name}</td>
+                        <td class="py-3 text-brand-ivory/60">${p.id}</td>
+                        <td class="py-3 text-brand-gold">₹${p.price}</td>
+                        <td class="py-3 font-bold">${p.stock}</td>
+                        <td class="py-3 text-brand-ivory/60">${unitsSold}</td>
+                        <td class="py-3">
+                            <button onclick="adminAdjustStock('${p.id}', 1)" class="bg-brand-gold text-brand-charcoal px-2 py-1 text-[9px] font-bold">+ Add Stock</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // Render Recent Orders List
+            const ordList = document.getElementById('admin-orders-list');
+            ordList.innerHTML = orders.length === 0 ? '<p class="text-brand-ivory/40">No orders logged.</p>' : '';
+            orders.forEach(o => {
+                ordList.innerHTML += `
+                    <div class="p-3 border border-brand-gold/10 bg-brand-charcoal/50">
+                        <div class="flex justify-between text-brand-gold">
+                            <span>${o.id} - ${o.customerName}</span>
+                            <span>₹${o.amount.toLocaleString()}</span>
+                        </div>
+                        <p class="text-brand-ivory/60 text-[10px] mt-1">Status: ${o.status} | Pay: ${o.paymentMethod}</p>
+                    </div>
+                `;
+            });
+
+            // Render Customer Database
+            const custList = document.getElementById('admin-customers-list');
+            custList.innerHTML = customers.length === 0 ? '<p class="text-brand-ivory/40">No registered guests.</p>' : '';
+            customers.forEach(c => {
+                custList.innerHTML += `
+                    <div class="p-3 border border-brand-gold/10 bg-brand-charcoal/50">
+                        <div class="flex justify-between text-brand-ivory">
+                            <span>${c.name}</span>
+                            <span class="text-brand-gold">Spent: ₹${c.totalSpent.toLocaleString()}</span>
+                        </div>
+                        <p class="text-brand-ivory/50 text-[10px] mt-1">${c.email} | Mobile: ${c.mobile}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function adminAdjustStock(id, qty) {
+            const p = products.find(prod => prod.id === id);
+            if (p) {
+                p.stock += qty;
+                saveBrowserState();
+                renderProducts(products);
+                renderAdminDashboard();
+            }
+        }
+
+
+        // --- NAVIGATION UI TOGGLES ---
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('translate-x-full');
+        }
+
+        function toggleSearch() {
+            const term = prompt("Search House & Heir Shirts by fabric, keyword, or collection:");
+            if (term) {
+                const results = products.filter(p => 
+                    p.name.toLowerCase().includes(term.toLowerCase()) || 
+                    p.fabric.toLowerCase().includes(term.toLowerCase()) ||
+                    p.category.toLowerCase().includes(term.toLowerCase())
+                );
+                renderProducts(results);
+                window.location.href = "#shop";
+            }
+        }
+    </script>
+</body>
+</html>
