@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOUSE & HEIR — Craftsmanship. Beyond Generations.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="preconnect" href="https://images.unsplash.com">
+<style>
+:root{
+--ivory:#FDF8EE;
+--beige:#F5EAD1;
+--beige-dark:#E8DCC0;
+--sand:#DCCEB0;
+--charcoal:#2B2116;
+--brown:#4A3B28;
+--brown-light:#7A6B55;
+--gold:#C5A059;
+--gold-light:#D6B77A;
+--gold-dark:#A68A50;
+--gold-muted:rgba(197,160,89,0.18);
+--white:#FFFEFB;
+--urgent:#8B1A1A
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--ivory);color:var(--brown);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.cinzel{font-family:'Cinzel',serif;letter-spacing:0.02em}
+.instrument{font-family:'Instrument Serif',serif}
+.btn{border:1.5px solid var(--gold);background:var(--gold);color:var(--white);padding:14px 32px;border-radius:999px;font-size:11px;letter-spacing:0.18em;font-weight:600;cursor:pointer;transition:all 0.3s ease}
+.btn:hover{background:var(--brown);color:var(--white);border-color:var(--brown);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--brown);border-color:var(--brown)}
+.btn-ghost:hover{background:var(--brown);color:var(--white)}
+/* ENTRY GATE - Logo beige theme */
+#entryGate{position:fixed;inset:0;z-index:10000;background:var(--beige);display:flex;align-items:center;justify-content:center;transition:transform 1s cubic-bezier(0.16,1,0.3,1);background-image:radial-gradient(circle at 50% 30%, rgba(197,160,89,0.08), transparent 70%)}
+#entryGate.exit{transform:translateY(-100%)}
+.entry-inner{width:100%;max-width:440px;text-align:center;padding:40px}
+.entry-logo{width:180px;height:180px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);margin:0 auto 24px;display:block;box-shadow:0 0 0 8px var(--ivory), 0 10px 40px rgba(197,160,89,0.3)}
+.entry-card{background:var(--white);border-radius:20px;padding:36px;border:1px solid var(--gold);box-shadow:0 20px 60px rgba(61,43,28,0.12)}
+.field{text-align:left;margin-bottom:16px}
+.field label{font-size:10px;letter-spacing:0.18em;font-weight:600;display:block;margin-bottom:6px;opacity:0.7;color:var(--brown)}
+.field input{width:100%;padding:13px 14px;border-radius:999px;border:1px solid var(--beige-dark);background:var(--ivory);font-size:13px;outline:none;transition:0.3s}
+.field input:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 3px var(--gold-muted)}
+.field .err{font-size:11px;color:var(--urgent);margin-top:6px;display:none}
+.field.invalid .err{display:block}
+.field.invalid input{border-color:var(--urgent);background:#FFF5F5}
+/* HEADER - Beige luxury */
+#mainHeader{position:fixed;top:0;width:100%;z-index:50;transition:all 0.4s;background:rgba(253,248,238,0.8);backdrop-filter:blur(12px);border-bottom:1px solid rgba(197,160,89,0.15)}
+#mainHeader.scrolled{background:rgba(253,248,238,0.95);box-shadow:0 4px 20px rgba(61,43,28,0.06)}
+.nav{max-width:1440px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:14px 5%}
+.logoWrap{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logoWrap img{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);box-shadow:0 2px 8px rgba(197,160,89,0.2)}
+.navLinks{display:flex;gap:32px;list-style:none}
+.navLinks a{font-size:11px;letter-spacing:0.18em;text-decoration:none;color:var(--brown);font-weight:500;cursor:pointer;position:relative}
+.navLinks a:after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--gold);transition:0.3s}
+.navLinks a:hover:after{width:100%}
+#mobileMenu{position:fixed;inset:0;z-index:60;background:var(--ivory);transform:translateX(100%);transition:transform 0.5s ease;padding:100px 8%}
+#mobileMenu.open{transform:translateX(0)}
+/* SECTIONS - Fast scroll optimized */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;background:var(--beige);color:var(--brown);overflow:hidden}
+.heroBg{position:absolute;inset:0;opacity:0.4;background:linear-gradient(180deg,rgba(253,248,238,0.2),rgba(232,220,192,0.8)),url('./images/logo.png') center 30%/400px no-repeat, url('https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1600&q=80') center/cover}
+.section{max-width:1440px;margin:0 auto;padding:80px 5%}
+.productGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:28px}
+.card{background:var(--white);border-radius:16px;overflow:hidden;border:1px solid var(--gold-muted);transition:all 0.3s ease;cursor:pointer}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(61,43,28,0.1);border-color:var(--gold)}
+.card img{width:100%;height:380px;object-fit:cover;background:var(--beige)}
+.cardInfo{padding:18px 20px}
+.stock{font-size:10px;letter-spacing:0.14em;font-weight:700;padding:4px 10px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.stock.low{background:rgba(139,26,26,0.08);color:var(--urgent)}
+.stock.ok{background:var(--beige);color:var(--brown-light)}
+.page{display:none;min-height:80vh}
+.page.active{display:block;animation:fade 0.3s ease}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.cartDrawer{position:fixed;right:0;top:0;width:420px;max-width:90vw;height:100vh;background:var(--white);z-index:70;transform:translateX(100%);transition:transform 0.4s ease;box-shadow:-20px 0 60px rgba(0,0,0,0.1);display:flex;flex-direction:column}
+.cartDrawer.open{transform:translateX(0)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.2);z-index:65;display:none;backdrop-filter:blur(2px)}
+.overlay.show{display:block}
+.adminGate{position:fixed;inset:0;z-index:9000;background:var(--beige);display:none;align-items:center;justify-content:center}
+.adminGate.show{display:flex}
+</style>
+</head>
+<body>
+
+<!-- ENTRY GATE - Gold Beige Theme -->
+<div id="entryGate">
+<div class="entry-inner">
+<img src="./images/logo.png" class="entry-logo" alt="House & Heir Logo" onerror="this.src='./images/logo-full.jpg'">
+<p class="cinzel" style="color:var(--gold-dark);letter-spacing:0.4em;font-size:11px;margin-bottom:8px;font-weight:600">HOUSE & HEIR</p>
+<p class="cinzel" style="color:var(--brown);font-size:22px;line-height:1.2">Craftsmanship.<br>Beyond Generations.</p>
+<div class="entry-card" style="margin-top:28px">
+<p class="cinzel" style="font-size:13px;letter-spacing:0.22em;margin-bottom:4px;color:var(--brown)">ENTER THE HOUSE</p>
+<p style="font-size:11px;opacity:0.6;margin-bottom:22px;color:var(--brown-light)">The collection is reserved for members.</p>
+<form id="entryForm" novalidate>
+<div class="field" id="fName"><label>Full Name</label><input id="inName" placeholder="Ashiff Syed"><div class="err">Enter your full name.</div></div>
+<div class="field" id="fEmail"><label>Email Address</label><input id="inEmail" type="email" placeholder="you@houseandheir.com"><div class="err">Enter a valid email.</div></div>
+<div class="field" id="fPhone"><label>Mobile Number</label><input id="inPhone" placeholder="+91 98765 43210"><div class="err">Enter a valid mobile number.</div></div>
+<button type="submit" class="btn" style="width:100%;margin-top:8px">ENTER</button>
+<p style="font-size:10px;opacity:0.5;margin-top:12px;color:var(--brown-light)">Rooted in Tamil Nadu. Designed for a wider world.</p>
+</form>
+</div>
+</div>
+</div>
+
+<!-- ADMIN GATE -->
+<div id="adminGate" class="adminGate">
+<div class="entry-inner">
+<div class="entry-card">
+<p class="cinzel" style="margin-bottom:16px">ADMIN ACCESS</p>
+<div class="field"><label>Admin ID</label><input id="adminId" placeholder="admin"></div>
+<div class="field"><label>Password</label><input id="adminPass" type="password" placeholder="houseandheir2026"></div>
+<button class="btn" style="width:100%" onclick="unlockAdmin()">ENTER ADMIN</button>
+<button class="btn btn-ghost" style="width:100%;margin-top:8px" onclick="closeAdminGate()">CLOSE</button>
+<p style="font-size:10px;opacity:0.5;margin-top:10px">Demo: admin / houseandheir2026</p>
+</div>
+</div>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
+<div class="nav">
+<div class="logoWrap" onclick="go('home')"><img src="./images/logo-icon.png" alt="H&H" onerror="this.src='./images/logo.png'"><span class="cinzel" style="font-weight:700;letter-spacing:0.18em;font-size:14px;color:var(--brown)">HOUSE & HEIR</span></div>
+<ul class="navLinks"><li><a onclick="go('home')">New Arrivals</a></li><li><a onclick="go('shop')">Shop</a></li><li><a onclick="go('collections')">Collections</a></li><li><a onclick="go('craft')">Craft</a></li><li><a onclick="go('about')">About</a></li></ul>
+<div style="display:flex;gap:18px;align-items:center">
+<span style="font-size:12px;cursor:pointer" onclick="toggleSearch()"><i class="fa-solid fa-magnifying-glass"></i></span>
+<span style="font-size:12px;cursor:pointer" onclick="go('account')"><i class="fa-regular fa-user"></i></span>
+<span style="font-size:12px;cursor:pointer" onclick="go('wishlist')"><i class="fa-regular fa-heart"></i> <span id="wishCount" style="font-size:10px">0</span></span>
+<span class="cart-icon" style="position:relative;cursor:pointer;font-size:12px" onclick="openCart()"><i class="fa-solid fa-bag-shopping"></i> <span id="cartCount" style="position:absolute;top:-8px;right:-10px;background:var(--gold);color:var(--white);font-size:9px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center">0</span></span>
+<span style="display:none;font-size:16px;cursor:pointer" id="ham" onclick="openMobile()"><i class="fa-solid fa-bars"></i></span>
+</div>
+</div>
+</header>
+
+<div id="mobileMenu"><div style="display:flex;justify-content:space-between"><span class="cinzel">HOUSE & HEIR</span><span onclick="closeMobile()" style="cursor:pointer">✕</span></div><div style="margin-top:40px;display:flex;flex-direction:column;gap:18px;font-size:18px" class="cinzel"><a onclick="go('home');closeMobile()">New Arrivals</a><a onclick="go('shop');closeMobile()">Shop</a><a onclick="go('collections');closeMobile()">Collections</a><a onclick="go('craft');closeMobile()">Craft</a><a onclick="go('about');closeMobile()">About</a><a onclick="openAdminGate()">Admin</a><a onclick="signOut()">Sign Out</a></div></div>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cartDrawer" id="cartDrawer">
+<div style="padding:24px;border-bottom:1px solid var(--beige-dark);display:flex;justify-content:space-between"><span class="cinzel">BAG</span><span style="cursor:pointer" onclick="closeCart()">✕</span></div>
+<div id="cartList" style="flex:1;overflow-y:auto;padding:16px"></div>
+<div style="padding:20px;border-top:1px solid var(--beige-dark)"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:12px"><span>Subtotal</span><span id="cartSub">₹0</span></div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:12px"><span>Shipping</span><span style="color:green">FREE</span></div><div style="display:flex;justify-content:space-between;font-weight:700;margin-bottom:16px"><span>Total</span><span id="cartTotal">₹0</span></div><button class="btn" style="width:100%" onclick="go('checkout');closeCart()">PROCEED TO CHECKOUT</button></div>
+</div>
+
+<!-- PAGES -->
+<main style="padding-top:72px">
+<section id="home" class="page active">
+<div class="hero"><div class="heroBg"></div><div style="position:relative;z-index:1;max-width:700px;padding:0 5%"><p class="cinzel" style="letter-spacing:0.4em;font-size:11px;color:var(--gold-dark);margin-bottom:16px;font-weight:600">HOUSE & HEIR</p><h1 class="cinzel" style="font-size:clamp(36px,6vw,72px);line-height:0.9;color:var(--brown)">CRAFTSMANSHIP.<br>BEYOND<br>GENERATIONS.</h1><p style="margin-top:16px;letter-spacing:0.2em;font-size:12px;opacity:0.8;color:var(--brown-light)">Built with intention. Designed to endure.</p><div style="margin-top:28px;display:flex;gap:12px;justify-content:center"><button class="btn" onclick="go('shop')">SHOP THE COLLECTION</button><button class="btn btn-ghost" onclick="go('craft')">DISCOVER THE CRAFT</button></div></div></div>
+<div class="section"><p class="cinzel" style="font-size:28px;max-width:760px;line-height:1.2;color:var(--brown)">We don't define quality by how it sounds. We define it by how it's built.</p><p style="margin-top:16px;max-width:560px;font-size:13px;opacity:0.7;line-height:1.7">Don't just say premium. Prove it. 240 GSM. 100% Combed Cotton. Pre-Shrunk. 12 Stitches Per Inch. House & Heir shows the construction instead of claiming luxury.</p></div>
+<div class="section" style="padding-top:0"><div style="display:grid;grid-template-columns:1fr 1fr;gap:24px"><div style="background:var(--white);border-radius:16px;padding:32px;border:1px solid var(--gold-muted)"><p class="cinzel" style="font-size:12px;letter-spacing:0.2em;opacity:0.6">START WITH WHAT TOUCHES THE SKIN</p><h3 style="margin-top:12px;font-size:22px">Fabric</h3><p style="font-size:12px;opacity:0.7;margin-top:12px;line-height:1.7">240 GSM • 100% Combed Cotton • Pre-Shrunk after 20 washes • Washed 3x before stitching so color never bleeds on white veshti.</p></div><div style="background:var(--brown);color:var(--ivory);border-radius:16px;padding:32px"><p class="cinzel" style="font-size:12px;letter-spacing:0.2em;color:var(--gold)">BUILT IN THE DETAILS</p><h3 style="margin-top:12px;font-size:22px">Construction</h3><p style="font-size:12px;opacity:0.7;margin-top:12px;line-height:1.7">12 SPI not 8 • Double-layered shoulder • Reinforced collar • YKK heavy-duty buttons • High-density print with 0 crack guarantee.</p></div></div></div>
+<div class="section"><h3 class="cinzel" style="font-size:28px;text-align:center;margin-bottom:32px;color:var(--brown)">NEW ARRIVALS</h3><div id="homeGrid" class="productGrid"></div></div>
+</section>
+
+<section id="shop" class="page">
+<div class="section">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+<h2 class="cinzel">SHOP</h2>
+<div style="display:flex;gap:12px;align-items:center"><input id="searchInput" placeholder="Search" style="padding:10px 14px;border-radius:999px;border:1px solid var(--beige-dark);background:var(--white);font-size:12px"><select id="sortSelect" style="padding:10px 14px;border-radius:999px;border:1px solid var(--beige-dark);background:var(--white);font-size:12px"><option value="pop">Most Popular</option><option value="new">New Arrivals</option><option value="low">Price Low to High</option><option value="high">Price High to Low</option></select></div>
+</div>
+<div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap"><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" class="fcol" value="Heritage"> Heritage</label><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" class="fcol" value="Pongal"> Pongal</label><label style="font-size:11px;display:flex;gap:6px;align-items:center"><input type="checkbox" class="fcol" value="Atelier"> Atelier</label></div>
+<div id="shopGrid" class="productGrid" style="margin-top:28px"></div>
+</div>
+</section>
+
+<section id="pdp" class="page">
+<div class="section" id="pdpContent"></div>
+</section>
+
+<section id="checkout" class="page">
+<div class="section" style="max-width:900px">
+<h2 class="cinzel">CHECKOUT</h2>
+<div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;margin-top:24px">
+<div id="checkoutForm"></div>
+<div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:16px;padding:20px;height:fit-content"><p style="font-weight:600">Order Summary</p><div id="coSummary" style="margin-top:12px;font-size:12px"></div></div>
+</div>
+</div>
+</section>
+
+<section id="orderConfirm" class="page">
+<div class="section" style="text-align:center;max-width:600px"><h2 class="cinzel" id="confirmText">Thank you!</h2><div id="confirmDetails" style="margin-top:16px"></div><button class="btn" style="margin-top:24px" onclick="go('home')">CONTINUE SHOPPING</button></div>
+</section>
+
+<section id="collections" class="page"><div class="section"><h2 class="cinzel">COLLECTIONS</h2><p style="margin-top:12px;opacity:0.7">Heritage, Pongal, Atelier — curated stories.</p></div></section>
+<section id="craft" class="page"><div class="section"><h2 class="cinzel">THE CRAFT</h2><p style="margin-top:12px;line-height:1.7;opacity:0.8;max-width:600px">We wash our fabric 3x before stitching. 240 GSM, 100% combed cotton, 12 stitches per inch. Reactive dyes that bond with fibre, not surface coating. This is House & Heir — craftsmanship beyond generations, in the colors of your gold emblem.</p><img src="./images/logo-full.jpg" style="margin-top:24px;width:100%;max-width:500px;border-radius:16px;border:1px solid var(--gold)"></div></section>
+<section id="about" class="page"><div class="section"><h2 class="cinzel">ABOUT</h2><p style="margin-top:12px;opacity:0.7;max-width:600px;line-height:1.7">Rooted in Tamil Nadu, designed for a wider world. House & Heir is built on the principle: don't just say premium, prove it. Our beige and gold palette comes from our emblem — earth, craftsmanship, heritage.</p></div></section>
+<section id="wishlist" class="page"><div class="section"><h2 class="cinzel">WISHLIST</h2><div id="wishGrid" class="productGrid" style="margin-top:24px"></div></div></section>
+<section id="account" class="page"><div class="section"><h2 class="cinzel">MY ACCOUNT</h2><div id="accContent" style="margin-top:24px"></div><button class="btn btn-ghost" style="margin-top:20px" onclick="signOut()">SIGN OUT</button></div></section>
+<section id="admin" class="page"><div class="section"><h2 class="cinzel">ADMIN DASHBOARD</h2><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px"><div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:12px;padding:16px"><p style="font-size:11px;opacity:0.6">Revenue</p><p id="aRev" style="font-weight:700;font-size:20px">₹0</p></div><div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:12px;padding:16px"><p style="font-size:11px;opacity:0.6">Orders</p><p id="aOrders" style="font-weight:700;font-size:20px">0</p></div><div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:12px;padding:16px"><p style="font-size:11px;opacity:0.6">Sold</p><p id="aSold" style="font-weight:700;font-size:20px">0</p></div><div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:12px;padding:16px"><p style="font-size:11px;opacity:0.6">Low Stock</p><p id="aLow" style="font-weight:700;font-size:20px">0</p></div></div><div style="margin-top:32px"><p style="font-weight:600">Inventory</p><div style="overflow:auto;margin-top:12px"><table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr style="text-align:left;opacity:0.6"><th style="padding:10px">SKU</th><th>Name</th><th>Price</th><th>Initial</th><th>Sold</th><th>Remaining</th><th>Status</th><th>Action</th></tr></thead><tbody id="invBody"></tbody></table></div></div><div style="margin-top:32px"><p style="font-weight:600">Orders</p><div style="overflow:auto;margin-top:12px"><table style="width:100%;font-size:12px;border-collapse:collapse"><thead><tr style="text-align:left;opacity:0.6"><th>ID</th><th>Customer</th><th>Products</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead><tbody id="ordBody"></tbody></table></div></div><canvas id="salesChart" width="800" height="240" style="width:100%;margin-top:24px;border-radius:12px"></canvas></div></section>
+
+</main>
+
+<footer style="background:var(--brown);color:var(--beige);padding:40px 5%;margin-top:60px;border-top:3px solid var(--gold)"><div style="max-width:1440px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:24px"><div><div style="display:flex;gap:12px;align-items:center"><img src="./images/logo-icon.png" style="width:36px;height:36px;border-radius:50%;border:1px solid var(--gold)" onerror="this.src='./images/logo.png'"><p class="cinzel" style="font-size:14px;letter-spacing:0.2em">HOUSE & HEIR</p></div><p style="font-size:11px;opacity:0.7;margin-top:8px;letter-spacing:0.2em">Craftsmanship. Beyond Generations.</p><p style="font-size:11px;opacity:0.6;margin-top:16px;line-height:1.6;max-width:320px">Rooted in Tamil Nadu. Designed for a wider world. Our beige & gold palette is from our emblem — earth, craft, heritage.</p></div><div><p style="font-size:11px;letter-spacing:0.18em;font-weight:600">SHOP</p><p style="font-size:11px;opacity:0.7;margin-top:12px;line-height:2">New Arrivals<br>Shirts<br>Printed Shirts<br>Collections<br>Best Sellers</p></div><div><p style="font-size:11px;letter-spacing:0.18em;font-weight:600">CRAFT</p><p style="font-size:11px;opacity:0.7;margin-top:12px;line-height:2">Fabric<br>Construction<br>Print<br>Size Guide<br>Care Guide</p></div><div><p style="font-size:11px;letter-spacing:0.18em;font-weight:600">ENTER THE HOUSE</p><div style="display:flex;gap:8px;margin-top:12px"><input placeholder="Email" style="flex:1;background:rgba(255,255,255,0.1);border:1px solid var(--gold);border-radius:999px;padding:10px 14px;color:white;font-size:11px"><button class="btn" style="padding:10px 16px;font-size:10px">JOIN</button></div><p style="font-size:10px;opacity:0.5;margin-top:12px">Instagram • WhatsApp • Contact • Shipping • Returns</p></div></div><p style="text-align:center;font-size:10px;opacity:0.4;margin-top:32px">© 2026 HOUSE & HEIR. Crafted for Excellence. Vandavasi. Beige & Gold Edition.</p></footer>
+
+<script>
+const LS_KEYS={user:'hh_user',cart:'hh_cart',wish:'hh_wish',orders:'hh_orders',products:'hh_products',customers:'hh_customers'};
+const defaultProducts=[
+{id:'HH-BLK-WAR-F',sku:'HH-BLK-WAR-001',name:'The Warrior — Jet Black Edition',collection:'Heritage',price:2799,initial:12,sold:9,remaining:3,fabric:'240 GSM • 100% Combed Cotton • Pre-Shrunk',gsm:240,comp:'100% Combed Cotton',stitch:'12 SPI',prep:'Washed 3x before stitching',print:'High-Density • Reactive Dyes • 0 crack 30 washes',care:'Cold wash',images:['./images/product-warrior-1.jpg','./images/product-warrior-2.jpg'],desc:'Temple gopuram blueprint on left, gold horse warrior on right. Built to last 20 washes same length.',sizes:['S','M','L','XL','XXL'],colors:['Jet Black']},
+{id:'HH-BEI-PON-F',sku:'HH-BEI-PON-001',name:'Pongal — Beige Shirt + Dhoti Combo',collection:'Pongal',price:2999,initial:8,sold:6,remaining:2,fabric:'240 GSM • 100% Combed Cotton • Pre-Shrunk',gsm:240,comp:'100% Combed Cotton',stitch:'12 SPI',prep:'Washed 3x',print:'High-Density • Sun + Pongal Pot + Sugarcane • Reactive',care:'Cold wash',images:['./images/product-pongal-1.jpg','./images/product-pongal-2.jpg'],desc:'Sun, sugarcane, pongal pot, temple village. Includes premium white cotton veshti 4.5m + gold gift box.',sizes:['S','M','L','XL'],colors:['Beige'],combo:true},
+{id:'HH-BEI-PON-S',sku:'HH-BEI-PON-002',name:'Pongal — Beige Shirt Only',collection:'Pongal',price:2499,initial:10,sold:7,remaining:3,fabric:'240 GSM',gsm:240,comp:'100% Combed Cotton',stitch:'12 SPI',prep:'Washed 3x',print:'High-Density',care:'Cold wash',images:['./images/product-pongal-1.jpg','./images/product-pongal-2.jpg'],desc:'Beige Pongal shirt alone. Sun, sugarcane, pot, village.',sizes:['S','M','L','XL'],colors:['Beige']},
+{id:'HH-BLK-ARC-F',sku:'HH-BLK-ARC-001',name:'The Archer — Jet Black',collection:'Atelier',price:2799,initial:6,sold:5,remaining:1,fabric:'240 GSM',gsm:240,comp:'100% Combed Cotton',stitch:'12 SPI',prep:'Pre-shrunk',print:'High-Density Gold',care:'Cold wash',images:['./images/product-warrior-1.jpg','./images/product-warrior-2.jpg'],desc:'Archer with spear, gold line work. Double-layered shoulder.',sizes:['M','L','XL'],colors:['Black']},
+];
+function getProducts(){const v=localStorage.getItem(LS_KEYS.products);if(v){try{return JSON.parse(v)}catch{}};localStorage.setItem(LS_KEYS.products,JSON.stringify(defaultProducts));return defaultProducts}
+function saveProducts(p){localStorage.setItem(LS_KEYS.products,JSON.stringify(p))}
+let products=getProducts();
+let cart=JSON.parse(localStorage.getItem(LS_KEYS.cart)||'[]');
+let wishlist=JSON.parse(localStorage.getItem(LS_KEYS.wish)||'[]');
+let orders=JSON.parse(localStorage.getItem(LS_KEYS.orders)||'[]');
+let customers=JSON.parse(localStorage.getItem(LS_KEYS.customers)||'[]');
+let currentPDP=null;let currentSize='L';
+function stockLabel(rem){if(rem<=0)return '<span class="stock low">SOLD OUT</span>';if(rem===1)return '<span class="stock low">ONLY 1 LEFT</span>';if(rem===2)return '<span class="stock low">ONLY 2 LEFT</span>';if(rem===3)return '<span class="stock low">ONLY 3 LEFT</span>';return `<span class="stock ok">${rem} IN STOCK</span>`}
+function renderGrid(containerId,filterFn){
+const el=document.getElementById(containerId);if(!el)return;
+const search=(document.getElementById('searchInput')?.value||'').toLowerCase();
+const sort=document.getElementById('sortSelect')?.value||'pop';
+let list=products.filter(p=>{if(filterFn && !filterFn(p))return false;if(search && !p.name.toLowerCase().includes(search))return false;if(document.querySelectorAll('.fcol:checked').length){const cols=Array.from(document.querySelectorAll('.fcol:checked')).map(c=>c.value);if(!cols.includes(p.collection))return false}return true});
+if(sort==='low')list.sort((a,b)=>a.price-b.price);if(sort==='high')list.sort((a,b)=>b.price-a.price);if(sort==='new')list.sort((a,b)=>b.initial-a.initial);
+el.innerHTML=list.map(p=>`
+<div class="card" onclick="openPDP('${p.id}')">
+<img src="${p.images[0]}" loading="lazy" onerror="this.src='./images/logo.png'">
+<div class="cardInfo">
+${stockLabel(p.remaining)}
+<div style="font-weight:600;font-size:13px">${p.name}</div>
+<div style="font-weight:700;margin-top:4px;color:var(--brown)">₹${p.price}</div>
+<div style="font-size:10px;opacity:0.6;margin-top:4px;letter-spacing:0.1em">${p.collection} • ${p.fabric.split('•')[0]}</div>
+</div>
+</div>`).join('');
+}
+function openPDP(id){
+const p=products.find(x=>x.id===id);if(!p)return;currentPDP=p;
+document.getElementById('pdpContent').innerHTML=`
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+<div>
+<img src="${p.images[0]}" style="width:100%;border-radius:16px;aspect-ratio:4/5;object-fit:cover;border:1px solid var(--gold-muted)" onerror="this.src='./images/logo.png'">
+<div style="display:flex;gap:12px;margin-top:12px">${p.images.map(im=>`<img src="${im}" style="width:70px;height:90px;object-fit:cover;border-radius:8px;border:1px solid var(--beige-dark);cursor:pointer" onclick="this.parentElement.previousElementSibling.src=this.src" onerror="this.src='./images/logo.png'">`).join('')}</div>
+</div>
+<div>
+<p style="font-size:11px;letter-spacing:0.18em;opacity:0.6">${p.collection} • ${p.sku}</p>
+<h2 class="cinzel" style="font-size:28px;margin-top:8px">${p.name}</h2>
+<p style="font-size:22px;font-weight:700;margin-top:12px">₹${p.price}</p>
+<div style="margin-top:12px">${stockLabel(p.remaining)}</div>
+<p style="font-size:12px;opacity:0.7;margin-top:16px;line-height:1.7">${p.desc}</p>
+<div style="margin-top:20px"><p style="font-size:11px;letter-spacing:0.14em;font-weight:600">SIZE</p><div style="display:flex;gap:8px;margin-top:8px">${p.sizes.map(s=>`<button onclick="currentSize='${s}'" style="padding:8px 14px;border-radius:999px;border:1px solid ${currentSize===s?'var(--gold)':'var(--beige-dark)'};background:${currentSize===s?'var(--gold)':'var(--white)'};color:${currentSize===s?'white':'var(--brown)'};font-size:11px;cursor:pointer">${s}</button>`).join('')}</div></div>
+<div style="margin-top:20px;display:flex;gap:12px"><button class="btn" style="flex:1" onclick="addToCart('${p.id}')">ADD TO BAG — ₹${p.price}</button><button class="btn btn-ghost" onclick="toggleWishlist('${p.id}')"><i class="fa-regular fa-heart"></i></button></div>
+<div style="margin-top:24px;background:var(--beige);border-radius:12px;padding:16px;font-size:11px;line-height:1.7"><p><b>Fabric:</b> ${p.fabric}</p><p><b>Stitch:</b> ${p.stitch}</p><p><b>Print:</b> ${p.print}</p><p><b>Care:</b> ${p.care}</p></div>
+</div>
+</div>`;
+go('pdp');
+}
+function addToCart(id){const p=products.find(x=>x.id===id);if(!p||p.remaining<=0)return;const ex=cart.find(c=>c.id===id && c.size===currentSize);if(ex)ex.qty++;else cart.push({id:p.id,name:p.name,price:p.price,size:currentSize,qty:1,image:p.images[0]});p.remaining--;p.sold++;saveProducts(products);saveCart();renderGrid('homeGrid');renderGrid('shopGrid');openCart();updateCounts()}
+function saveCart(){localStorage.setItem(LS_KEYS.cart,JSON.stringify(cart))}
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('overlay').classList.add('show');renderCartDrawer()}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('overlay').classList.remove('show')}
+function renderCartDrawer(){const el=document.getElementById('cartList');if(!el)return;if(cart.length===0){el.innerHTML='<p style="opacity:0.6;text-align:center;margin-top:40px">Your bag is empty.</p>';}else{el.innerHTML=cart.map((c,i)=>`<div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--beige-dark)"><img src="${c.image}" style="width:60px;height:80px;object-fit:cover;border-radius:8px" onerror="this.src='./images/logo.png'"><div style="flex:1"><p style="font-size:12px;font-weight:600">${c.name}</p><p style="font-size:11px;opacity:0.6">Size: ${c.size}</p><p style="font-size:12px;font-weight:700;margin-top:4px">₹${c.price} x ${c.qty}</p></div><div style="display:flex;flex-direction:column;gap:8px"><button onclick="cart[${i}].qty++;saveCart();renderCartDrawer();updateCounts()" style="border:1px solid var(--beige-dark);border-radius:50%;width:24px;height:24px">+</button><button onclick="if(cart[${i}].qty>1){cart[${i}].qty--}else{cart.splice(${i},1)};saveCart();renderCartDrawer();updateCounts()" style="border:1px solid var(--beige-dark);border-radius:50%;width:24px;height:24px">-</button></div></div>`).join('')}const sub=cart.reduce((s,c)=>s+c.price*c.qty,0);document.getElementById('cartSub').innerText='₹'+sub;document.getElementById('cartTotal').innerText='₹'+sub}
+function updateCounts(){document.getElementById('cartCount').innerText=cart.reduce((s,c)=>s+c.qty,0);document.getElementById('wishCount').innerText=wishlist.length}
+function toggleWishlist(id){const p=products.find(x=>x.id===id);if(!p)return;const i=wishlist.findIndex(w=>w.id===id);if(i>=0)wishlist.splice(i,1);else wishlist.push(p);localStorage.setItem(LS_KEYS.wish,JSON.stringify(wishlist));updateCounts();renderGrid('homeGrid');renderGrid('shopGrid')}
+function toggleSearch(){const inp=document.getElementById('searchInput');if(inp){inp.focus();go('shop')}}
+let coStep=1;
+function renderCheckout(){
+const el=document.getElementById('checkoutForm');if(!el)return;
+el.innerHTML=`
+<div style="background:var(--white);border:1px solid var(--beige-dark);border-radius:16px;padding:20px">
+<p style="font-weight:600">Shipping Details</p>
+<div style="display:grid;gap:12px;margin-top:12px">
+<input placeholder="Full Name" style="padding:12px;border-radius:999px;border:1px solid var(--beige-dark)">
+<input placeholder="Phone" style="padding:12px;border-radius:999px;border:1px solid var(--beige-dark)">
+<input placeholder="Address" style="padding:12px;border-radius:999px;border:1px solid var(--beige-dark)">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><input placeholder="City" style="padding:12px;border-radius:999px;border:1px solid var(--beige-dark)"><input placeholder="Pincode" style="padding:12px;border-radius:999px;border:1px solid var(--beige-dark)"></div>
+</div>
+<p style="font-weight:600;margin-top:20px">Payment</p>
+<div style="margin-top:8px"><label style="display:flex;gap:8px;align-items:center;font-size:12px"><input type="radio" checked> UPI / Cards / Netbanking</label></div>
+<button class="btn" style="width:100%;margin-top:20px" onclick="placeOrder()">PLACE ORDER — ₹${cart.reduce((s,c)=>s+c.price*c.qty,0)}</button>
+</div>`;
+document.getElementById('coSummary').innerHTML=cart.map(c=>`<div style="display:flex;justify-content:space-between;margin-bottom:8px"><span>${c.name} (${c.size}) x ${c.qty}</span><span>₹${c.price*c.qty}</span></div>`).join('')+`<div style="border-top:1px solid var(--beige-dark);margin-top:12px;padding-top:12px;display:flex;justify-content:space-between;font-weight:700"><span>Total</span><span>₹${cart.reduce((s,c)=>s+c.price*c.qty,0)}</span></div>`;
+}
+function placeOrder(){
+if(cart.length===0)return alert('Cart empty');
+const total=cart.reduce((s,c)=>s+c.price*c.qty,0);
+const user=JSON.parse(localStorage.getItem(LS_KEYS.user)||'{}');
+const orderId='HH'+Date.now().toString().slice(-6);
+const order={id:orderId,customer:user.name||'Guest',email:user.email||'',products:cart.map(c=>c.name+'('+c.size+') x'+c.qty).join(', '),amount:total,method:'UPI',status:'Placed',date:new Date().toISOString().slice(0,10)};
+orders.push(order);
+localStorage.setItem(LS_KEYS.orders,JSON.stringify(orders));
+let cust=customers.find(c=>c.email===user.email); if(cust){cust.orders+=1;cust.spent+=total;cust.last=new Date().toISOString()} else if(user.email){customers.push({name:user.name,email:user.email,phone:user.phone,orders:1,spent:total,last:new Date().toISOString()})} localStorage.setItem(LS_KEYS.customers,JSON.stringify(customers));
+cart=[];saveCart();coStep=1;
+document.getElementById('confirmText').innerText=`Thank you, ${user.name||'Heir'}. Your order has been placed.`;
+document.getElementById('confirmDetails').innerHTML=`<p style="font-size:12px"><b>Order ID:</b> ${orderId}<br><b>Customer:</b> ${user.name}<br><b>Amount:</b> ₹${total}<br><b>Payment:</b> UPI • Paid<br><b>Delivery:</b> Standard 3-4 days<br><b>Products:</b> ${orders[orders.length-1].products}</p>`;
+go('orderConfirm');renderGrid('homeGrid');renderGrid('shopGrid');renderAdmin();
+}
+function renderAdmin(){
+const rev=orders.reduce((s,o)=>s+o.amount,0);
+document.getElementById('aRev').innerText='₹'+rev;
+document.getElementById('aOrders').innerText=orders.length;
+document.getElementById('aSold').innerText=products.reduce((s,p)=>s+p.sold,0);
+document.getElementById('aLow').innerText=products.filter(p=>p.remaining<=3).length;
+document.getElementById('invBody').innerHTML=products.map(p=>`<tr><td style="padding:10px">${p.sku}</td><td style="padding:10px">${p.name}</td><td style="padding:10px">₹${p.price}</td><td style="padding:10px">${p.initial}</td><td style="padding:10px">${p.sold}</td><td style="padding:10px;font-weight:700;color:${p.remaining<=3?'var(--urgent)':''}">${p.remaining}</td><td style="padding:10px">${p.remaining===0?'SOLD OUT':p.remaining<=3?'LOW':'OK'}</td><td style="padding:10px"><button onclick="restock('${p.id}')" style="border:1px solid #ccc;border-radius:999px;padding:4px 10px;font-size:10px">+5</button></td></tr>`).join('');
+document.getElementById('ordBody').innerHTML=orders.map(o=>`<tr><td style="padding:10px">${o.id}</td><td style="padding:10px">${o.customer}</td><td style="padding:10px">${o.products}</td><td style="padding:10px">₹${o.amount}</td><td style="padding:10px">${o.method}</td><td style="padding:10px"><select onchange="updateOrderStatus('${o.id}',this.value)" style="font-size:11px"><option ${o.status==='Placed'?'selected':''}>Placed</option><option ${o.status==='Confirmed'?'selected':''}>Confirmed</option><option ${o.status==='Packed'?'selected':''}>Packed</option><option ${o.status==='Shipped'?'selected':''}>Shipped</option><option ${o.status==='Delivered'?'selected':''}>Delivered</option><option ${o.status==='Cancelled'?'selected':''}>Cancelled</option></select></td><td style="padding:10px">${o.date}</td></tr>`).join('') || '<tr><td colspan="7" style="padding:20px;text-align:center;opacity:0.6">No orders yet</td></tr>';
+}
+function restock(id){const p=products.find(x=>x.id===id); if(p){p.remaining+=5;p.initial+=5;saveProducts(products);renderAdmin();renderGrid('homeGrid');renderGrid('shopGrid');}}
+function updateOrderStatus(id,status){const o=orders.find(x=>x.id===id); if(o){o.status=status;localStorage.setItem(LS_KEYS.orders,JSON.stringify(orders));}}
+function go(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+const target=document.getElementById(page); if(target)target.classList.add('active');
+window.scrollTo({top:0,behavior:'smooth'});
+if(page==='shop' || page==='home'){renderGrid(page==='home'?'homeGrid':'shopGrid')}
+if(page==='admin'){renderAdmin()}
+if(page==='wishlist'){renderWishlist()}
+if(page==='account'){loadAccount()}
+if(page==='checkout'){coStep=1;renderCheckout()}
+}
+function renderWishlist(){
+const el=document.getElementById('wishGrid'); if(!el)return;
+if(wishlist.length===0){el.innerHTML='<p style="opacity:0.6">Your wishlist is empty.</p>';return}
+el.innerHTML=wishlist.map(p=>`<div class="card" onclick="openPDP('${p.id}')"><img src="${p.images[0]}" onerror="this.src='./images/logo.png'"><div class="cardInfo"><div style="font-weight:600;font-size:13px">${p.name}</div><div style="font-weight:700;margin-top:4px">₹${p.price}</div></div></div>`).join('');
+}
+function loadAccount(){
+const acc=document.getElementById('accContent'); if(!acc)return;
+const userOrders=orders.filter(o=>o.email===(JSON.parse(localStorage.getItem(LS_KEYS.user)||'{}').email||''));
+acc.innerHTML=`<div style="display:grid;gap:16px"><div><p style="font-weight:700">Previous Orders</p><div style="margin-top:12px">${userOrders.length?userOrders.map(o=>`<div style="border:1px solid var(--beige-dark);border-radius:12px;padding:12px;margin-bottom:8px;font-size:12px"><b>${o.id}</b> • ${o.products} • ₹${o.amount} • ${o.status}</div>`).join(''):'<p style="opacity:0.6;font-size:12px">No orders yet.</p>'}</div></div><div><p style="font-weight:700">Wishlist</p><p style="font-size:12px;opacity:0.6;margin-top:8px">${wishlist.length} items saved</p></div></div>`;
+}
+function openMobile(){document.getElementById('mobileMenu').classList.add('open')}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open')}
+function openAdminGate(){document.getElementById('adminGate').classList.add('show')}
+function closeAdminGate(){document.getElementById('adminGate').classList.remove('show')}
+function unlockAdmin(){const id=document.getElementById('adminId').value;const pass=document.getElementById('adminPass').value;if(id==='admin' && pass==='houseandheir2026'){closeAdminGate();go('admin')}else{alert('Invalid admin credentials. Demo: admin / houseandheir2026')}}
+document.getElementById('searchInput')?.addEventListener('input',()=>{renderGrid('shopGrid')});
+document.getElementById('sortSelect')?.addEventListener('change',()=>{renderGrid('shopGrid')});
+document.querySelectorAll('.fcol').forEach(c=>c.addEventListener('change',()=>renderGrid('shopGrid')));
+window.addEventListener('scroll', ()=>{
+  const curr=window.scrollY;
+  const hdr=document.getElementById('mainHeader');
+  if(curr>80) hdr.classList.add('scrolled');
+  else hdr.classList.remove('scrolled');
+}, {passive:true});
+function init(){
+const u=localStorage.getItem(LS_KEYS.user);
+if(!u){document.getElementById('entryGate').style.display='flex'}else{document.getElementById('entryGate').classList.add('exit');setTimeout(()=>{document.getElementById('entryGate').style.display='none'},1000)}
+document.getElementById('entryForm')?.addEventListener('submit',(e)=>{
+e.preventDefault();
+const name=document.getElementById('inName').value.trim();
+const email=document.getElementById('inEmail').value.trim();
+const phone=document.getElementById('inPhone').value.trim();
+let valid=true;
+document.getElementById('fName').classList.toggle('invalid',!name);if(!name)valid=false;
+const emailValid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);document.getElementById('fEmail').classList.toggle('invalid',!emailValid);if(!emailValid)valid=false;
+const phoneValid=phone.length>=8;document.getElementById('fPhone').classList.toggle('invalid',!phoneValid);if(!phoneValid)valid=false;
+if(!valid)return;
+localStorage.setItem(LS_KEYS.user,JSON.stringify({name,email,phone}));
+document.getElementById('entryGate').classList.add('exit');setTimeout(()=>{document.getElementById('entryGate').style.display='none'},1000);
+});
+renderGrid('homeGrid');renderGrid('shopGrid');updateCounts();
+}
+function signOut(){localStorage.removeItem(LS_KEYS.user);location.reload()}
+init();updateCounts();renderCartDrawer();
+</script>
+</body>
+</html>
