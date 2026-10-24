@@ -1,0 +1,62 @@
+[
+  {
+    "id": "kolam-ivory",
+    "name": "Kolam Ivory",
+    "collection": "pongal",
+    "colour": "Ivory",
+    "swatch": "#EDE3CF",
+    "price": 1199,
+    "tagline": "Front and back print, made for Pongal morning.",
+    "description": "A limited-edition celebration shirt with a detailed front and back print. Only 100 pieces will ever be made.",
+    "images": ["/images/products/kolam-ivory-1.jpg", "/images/products/kolam-ivory-2.jpg", "/images/products/kolam-ivory-3.jpg"],
+    "stock": { "M-38": 25, "L-40": 25, "XL-42": 25, "XXL-44": 25 }
+  },
+  {
+    "id": "sakkarai-rust",
+    "name": "Sakkarai Rust",
+    "collection": "pongal",
+    "colour": "Rust red",
+    "swatch": "#A5472F",
+    "price": 1199,
+    "tagline": "Warm rust red for the harvest festival.",
+    "description": "A limited-edition celebration shirt with a detailed front and back print. Only 100 pieces will ever be made.",
+    "images": ["/images/products/sakkarai-rust-1.jpg", "/images/products/sakkarai-rust-2.jpg", "/images/products/sakkarai-rust-3.jpg"],
+    "stock": { "M-38": 25, "L-40": 25, "XL-42": 25, "XXL-44": 25 }
+  },
+  {
+    "id": "midnight-navy",
+    "name": "Midnight Navy",
+    "collection": "new",
+    "colour": "Navy",
+    "swatch": "#1F2A44",
+    "price": 1199,
+    "tagline": "Deep navy with a heritage print.",
+    "description": "A limited-edition celebration shirt with a detailed front and back print. Only 100 pieces will ever be made.",
+    "images": ["/images/products/midnight-navy-1.jpg", "/images/products/midnight-navy-2.jpg", "/images/products/midnight-navy-3.jpg"],
+    "stock": { "M-38": 25, "L-40": 25, "XL-42": 25, "XXL-44": 25 }
+  },
+  {
+    "id": "vayal-olive",
+    "name": "Vayal Olive",
+    "collection": "new",
+    "colour": "Olive",
+    "swatch": "#6B6B3A",
+    "price": 1199,
+    "tagline": "Olive green, inspired by paddy fields.",
+    "description": "A limited-edition celebration shirt with a detailed front and back print. Only 100 pieces will ever be made.",
+    "images": ["/images/products/vayal-olive-1.jpg", "/images/products/vayal-olive-2.jpg", "/images/products/vayal-olive-3.jpg"],
+    "stock": { "M-38": 25, "L-40": 25, "XL-42": 25, "XXL-44": 25 }
+  },
+  {
+    "id": "kaapi-black",
+    "name": "Kaapi Black",
+    "collection": "new",
+    "colour": "Black",
+    "swatch": "#262220",
+    "price": 1199,
+    "tagline": "Black, for evenings that run long.",
+    "description": "A limited-edition celebration shirt with a detailed front and back print. Only 100 pieces will ever be made.",
+    "images": ["/images/products/kaapi-black-1.jpg", "/images/products/kaapi-black-2.jpg", "/images/products/kaapi-black-3.jpg"],
+    "stock": { "M-38": 25, "L-40": 25, "XL-42": 25, "XXL-44": 25 }
+  }
+]

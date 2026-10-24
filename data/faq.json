@@ -1,0 +1,22 @@
+{
+  "greeting": "Hi, I am the House & Heir assistant. Ask me about designs, sizes, payment or delivery.",
+  "fallback": "I am not sure about that one. You can send us an enquiry and the team will reply by email.",
+  "chips": ["What is available?", "Sizes", "Payment options", "Cash on delivery", "Book a fitting"],
+  "intents": [
+    { "id": "hello", "keywords": ["hi", "hello", "hey", "vanakkam", "good morning", "good evening"], "answer": "Hello! What would you like to know about House & Heir?" },
+    { "id": "preorder", "keywords": ["pre order", "preorder", "pre-order", "how to order", "how do i order", "buy", "how does", "checkout"], "answer": "Pick a design and size, add it to your bag, then go to checkout. You enter your delivery address and choose how to pay. You pay only at the very end, and nothing is charged before that." },
+    { "id": "cod", "keywords": ["cod", "cash on delivery", "cash", "pay on delivery", "pay later"], "answer": "Yes, cash on delivery is available at checkout. You pay the delivery partner when your shirt arrives." },
+    { "id": "payment", "keywords": ["payment", "pay", "upi", "gpay", "google pay", "phonepe", "paytm", "bhim", "card", "netbanking", "wallet", "razorpay", "cashfree"], "answer": "At checkout you can pay online with any UPI app (GPay, PhonePe, Paytm, BHIM and more), debit or credit card, netbanking or wallet. Or choose cash on delivery. We never see your card or UPI details." },
+    { "id": "sizes", "keywords": ["size", "sizes", "fit", "chest", "measurement", "xl", "xxl", "medium", "large"], "answer": "Every design comes in M-38, L-40, XL-42 and XXL-44, where the number is the chest size in inches. The product page has a size guide." },
+    { "id": "limited", "keywords": ["limited", "edition", "restock", "sold out", "exclusive"], "answer": "Every design is a limited edition made in a single small batch. When a size is gone, it is not restocked." },
+    { "id": "pongal", "keywords": ["pongal", "festival", "collection"], "answer": "The Pongal collection has two designs made for the harvest festival: Kolam Ivory and Sakkarai Rust. You can find them at the top of the Shop page." },
+    { "id": "new", "keywords": ["new arrival", "new arrivals", "latest", "new designs"], "answer": "The new arrivals are Midnight Navy, Vayal Olive and Kaapi Black." },
+    { "id": "delivery", "keywords": ["delivery", "shipping", "ship", "dispatch", "when will", "how long", "courier", "track", "tracking"], "answer": "Once your order ships, you will see the courier and tracking number on the My orders page. Full details are on our Shipping policy page.", "link": { "label": "My orders", "href": "/orders" } },
+    { "id": "returns", "keywords": ["return", "refund", "exchange", "cancel", "replace"], "answer": "You can cancel an order from the My orders page before it is packed. For returns, exchanges and refunds please read our Returns policy or write to sale@housenheir.com with your order ID.", "link": { "label": "Returns policy", "href": "/policy/returns" } },
+    { "id": "booking", "keywords": ["book", "booking", "fitting", "appointment", "consultation", "styling", "slot", "call"], "answer": "You can book a free styling and fitting call from the Book a fitting page. Pick a day, a time and whether you prefer a video call or a phone call.", "link": { "label": "Book a fitting", "href": "/book" } },
+    { "id": "contact", "keywords": ["contact", "email", "mail", "instagram", "reach", "talk to", "human", "support", "help"], "answer": "Write to sale@housenheir.com for orders, admin@housenheir.com for general matters, or founder@housenheir.com for the founder. We are on Instagram at @housenheir.", "link": { "label": "Send an enquiry", "href": "/contact" } },
+    { "id": "orders", "keywords": ["my order", "order status", "where is my order", "order id"], "answer": "You can see all your orders, their status and tracking on the My orders page.", "link": { "label": "My orders", "href": "/orders" } },
+    { "id": "otp", "keywords": ["otp", "code", "login", "sign in", "not received", "verify"], "answer": "The OTP is sent by SMS to the mobile number you entered. If it does not arrive in a minute, use Resend code. You can ask for a new code every 30 seconds." },
+    { "id": "about", "keywords": ["about", "who are you", "brand", "house and heir", "tamil", "heritage"], "answer": "House & Heir makes limited-edition celebration wear rooted in Tamil heritage. Each shirt has a detailed print on the front and the back." }
+  ]
+}

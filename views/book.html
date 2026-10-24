@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><link rel="icon" href="/images/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css?v=3"><title>Book a fitting | House &amp; Heir</title></head>
+<body>
+<div id="site-header"></div>
+<main><section><div class="wrap two">
+  <div>
+    <h1 style="font-size:2.4rem">Book a fitting</h1>
+    <p class="muted" style="margin:8px 0 22px">A free 20 minute call to help you pick a design and size. Monday to Saturday, India time.</p>
+    <form id="bf" novalidate>
+      <div class="field"><label>1. Choose a day</label><div class="chips" id="dates"></div></div>
+      <div class="field"><label>2. Choose a time</label><div class="chips" id="times"><span class="muted small">Pick a day first.</span></div></div>
+      <div class="field"><label>3. How should we reach you?</label><div class="chips" id="modes"></div></div>
+      <div class="field"><label for="note">Anything we should know? (optional)</label><textarea id="note" maxlength="300" placeholder="For example: I am between sizes, or I need it before Pongal."></textarea></div>
+      <p class="msg" id="msg" role="alert"></p>
+      <button class="btn" id="go" type="submit">Confirm booking</button>
+    </form>
+  </div>
+  <div><h2 style="font-size:1.8rem;margin-bottom:12px">Your bookings</h2><div id="mine"><p class="muted">Loading…</p></div></div>
+</div></section></main>
+<div id="site-footer"></div>
+<script src="/js/app.js?v=3" defer></script><script src="/js/book.js?v=3" defer></script>
+</body></html>

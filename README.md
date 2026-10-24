@@ -1,59 +1,32 @@
-![Async Logo](https://raw.githubusercontent.com/caolan/async/master/logo/async-logo_readme.jpg)
+# House & Heir online store (version 3)
 
-![Github Actions CI status](https://github.com/caolan/async/actions/workflows/ci.yml/badge.svg)
-[![NPM version](https://img.shields.io/npm/v/async.svg)](https://www.npmjs.com/package/async)
-[![Coverage Status](https://coveralls.io/repos/caolan/async/badge.svg?branch=master)](https://coveralls.io/r/caolan/async?branch=master)
-[![Join the chat at https://gitter.im/caolan/async](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/caolan/async?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![jsDelivr Hits](https://data.jsdelivr.com/v1/package/npm/async/badge?style=rounded)](https://www.jsdelivr.com/package/npm/async)
+Sign in with an OTP, browse five limited designs in 3D, pay only at the end (cash on delivery, any UPI app, cards, netbanking), track every order, and book a fitting. Runs on Vercel with a free Upstash Redis database.
 
-<!--
-|Linux|Windows|MacOS|
-|-|-|-|
-|[![Linux Build Status](https://dev.azure.com/caolanmcmahon/async/_apis/build/status/caolan.async?branchName=master&jobName=Linux&configuration=Linux%20node_10_x)](https://dev.azure.com/caolanmcmahon/async/_build/latest?definitionId=1&branchName=master) | [![Windows Build Status](https://dev.azure.com/caolanmcmahon/async/_apis/build/status/caolan.async?branchName=master&jobName=Windows&configuration=Windows%20node_10_x)](https://dev.azure.com/caolanmcmahon/async/_build/latest?definitionId=1&branchName=master) | [![MacOS Build Status](https://dev.azure.com/caolanmcmahon/async/_apis/build/status/caolan.async?branchName=master&jobName=OSX&configuration=OSX%20node_10_x)](https://dev.azure.com/caolanmcmahon/async/_build/latest?definitionId=1&branchName=master)| -->
+## What is in the box
+| Part | Where |
+|---|---|
+| Pages | `views/` and `public/js/` |
+| Look and feel (beige and brown, 3D) | `public/css/style.css` |
+| Shop logic (stock, orders, COD, coupons) | `lib/store.js` |
+| OTP (MSG91 or Twilio) | `lib/otp.js` |
+| Payments (Razorpay and Cashfree) | `server.js` |
+| Chatbot answers | `data/faq.json` |
+| Designs, prices, stock | `data/products.json` |
+| Discount codes (all off to start) | `data/coupons.json` |
+| Policy pages (fill in the [[ ]] gaps) | `data/policies/` |
+| Guides | `docs/` |
 
-Async is a utility module which provides straight-forward, powerful functions for working with [asynchronous JavaScript](http://caolan.github.io/async/v3/global.html). Although originally designed for use with [Node.js](https://nodejs.org/) and installable via `npm i async`, it can also be used directly in the browser.  An ESM/MJS version is included in the main `async` package that should automatically be used with compatible bundlers such as Webpack and Rollup.
+## Read these in order
+1. `docs/1_SETUP_AND_GO_LIVE.md` : accounts, keys and launch, step by step
+2. `docs/2_MOVE_FROM_YOUR_DUMMY_SITE.md` : switching housenheir.com from the old site safely
+3. `docs/3_ADDING_IMAGES.md` : logo, product photos, slider, in plain words
+4. `docs/4_ADMIN_MANUAL.md` : running the shop day to day
+5. `docs/5_LAUNCH_CHECKLIST.md` : tick every box before telling customers
 
-A pure ESM version of Async is available as [`async-es`](https://www.npmjs.com/package/async-es).
-
-For Documentation, visit <https://caolan.github.io/async/>
-
-*For Async v1.5.x documentation, go [HERE](https://github.com/caolan/async/blob/v1.5.2/README.md)*
-
-
-```javascript
-// for use with Node-style callbacks...
-var async = require("async");
-
-var obj = {dev: "/dev.json", test: "/test.json", prod: "/prod.json"};
-var configs = {};
-
-async.forEachOf(obj, (value, key, callback) => {
-    fs.readFile(__dirname + value, "utf8", (err, data) => {
-        if (err) return callback(err);
-        try {
-            configs[key] = JSON.parse(data);
-        } catch (e) {
-            return callback(e);
-        }
-        callback();
-    });
-}, err => {
-    if (err) console.error(err.message);
-    // configs is now a map of JSON data
-    doSomethingWith(configs);
-});
-```
-
-```javascript
-var async = require("async");
-
-// ...or ES2017 async functions
-async.mapLimit(urls, 5, async function(url) {
-    const response = await fetch(url)
-    return response.body
-}, (err, results) => {
-    if (err) throw err
-    // results is now an array of the response bodies
-    console.log(results)
-})
-```
+## Try it on your computer first
+1. Install Node.js (LTS) from nodejs.org.
+2. In a terminal inside this folder: `npm install`
+3. Copy `.env.example` to `.env`. Fill only `JWT_SECRET` and `ADMIN_PASSWORD`.
+4. `npm start`, then open http://localhost:3000
+In this test mode the OTP prints in your terminal, a "Test payment" option appears, and data lives in memory (it resets when you stop the server).
+`npm test` runs the automatic checks. `npm run check` lists policy gaps still to fill.
