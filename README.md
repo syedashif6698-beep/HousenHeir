@@ -1,203 +1,58 @@
-# negotiator
+# readable-stream
 
-[![NPM Version][npm-image]][npm-url]
-[![NPM Downloads][downloads-image]][downloads-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+***Node-core v8.17.0 streams for userland*** [![Build Status](https://travis-ci.org/nodejs/readable-stream.svg?branch=master)](https://travis-ci.org/nodejs/readable-stream)
 
-An HTTP content negotiator for Node.js
 
-## Installation
+[![NPM](https://nodei.co/npm/readable-stream.png?downloads=true&downloadRank=true)](https://nodei.co/npm/readable-stream/)
+[![NPM](https://nodei.co/npm-dl/readable-stream.png?&months=6&height=3)](https://nodei.co/npm/readable-stream/)
 
-```sh
-$ npm install negotiator
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/readable-stream.svg)](https://saucelabs.com/u/readable-stream)
+
+```bash
+npm install --save readable-stream
 ```
 
-## API
-
-```js
-var Negotiator = require('negotiator')
-```
-
-### Accept Negotiation
-
-```js
-availableMediaTypes = ['text/html', 'text/plain', 'application/json']
-
-// The negotiator constructor receives a request object
-negotiator = new Negotiator(request)
-
-// Let's say Accept header is 'text/html, application/*;q=0.2, image/jpeg;q=0.8'
-
-negotiator.mediaTypes()
-// -> ['text/html', 'image/jpeg', 'application/*']
-
-negotiator.mediaTypes(availableMediaTypes)
-// -> ['text/html', 'application/json']
-
-negotiator.mediaType(availableMediaTypes)
-// -> 'text/html'
-```
-
-You can check a working example at `examples/accept.js`.
-
-#### Methods
-
-##### mediaType()
-
-Returns the most preferred media type from the client.
-
-##### mediaType(availableMediaType)
-
-Returns the most preferred media type from a list of available media types.
-
-##### mediaTypes()
-
-Returns an array of preferred media types ordered by the client preference.
-
-##### mediaTypes(availableMediaTypes)
-
-Returns an array of preferred media types ordered by priority from a list of
-available media types.
-
-### Accept-Language Negotiation
-
-```js
-negotiator = new Negotiator(request)
-
-availableLanguages = ['en', 'es', 'fr']
-
-// Let's say Accept-Language header is 'en;q=0.8, es, pt'
-
-negotiator.languages()
-// -> ['es', 'pt', 'en']
-
-negotiator.languages(availableLanguages)
-// -> ['es', 'en']
-
-language = negotiator.language(availableLanguages)
-// -> 'es'
-```
-
-You can check a working example at `examples/language.js`.
-
-#### Methods
-
-##### language()
-
-Returns the most preferred language from the client.
-
-##### language(availableLanguages)
-
-Returns the most preferred language from a list of available languages.
-
-##### languages()
-
-Returns an array of preferred languages ordered by the client preference.
-
-##### languages(availableLanguages)
-
-Returns an array of preferred languages ordered by priority from a list of
-available languages.
-
-### Accept-Charset Negotiation
-
-```js
-availableCharsets = ['utf-8', 'iso-8859-1', 'iso-8859-5']
-
-negotiator = new Negotiator(request)
-
-// Let's say Accept-Charset header is 'utf-8, iso-8859-1;q=0.8, utf-7;q=0.2'
-
-negotiator.charsets()
-// -> ['utf-8', 'iso-8859-1', 'utf-7']
-
-negotiator.charsets(availableCharsets)
-// -> ['utf-8', 'iso-8859-1']
-
-negotiator.charset(availableCharsets)
-// -> 'utf-8'
-```
-
-You can check a working example at `examples/charset.js`.
-
-#### Methods
-
-##### charset()
-
-Returns the most preferred charset from the client.
-
-##### charset(availableCharsets)
-
-Returns the most preferred charset from a list of available charsets.
-
-##### charsets()
-
-Returns an array of preferred charsets ordered by the client preference.
-
-##### charsets(availableCharsets)
-
-Returns an array of preferred charsets ordered by priority from a list of
-available charsets.
-
-### Accept-Encoding Negotiation
-
-```js
-availableEncodings = ['identity', 'gzip']
-
-negotiator = new Negotiator(request)
-
-// Let's say Accept-Encoding header is 'gzip, compress;q=0.2, identity;q=0.5'
-
-negotiator.encodings()
-// -> ['gzip', 'identity', 'compress']
-
-negotiator.encodings(availableEncodings)
-// -> ['gzip', 'identity']
-
-negotiator.encoding(availableEncodings)
-// -> 'gzip'
-```
-
-You can check a working example at `examples/encoding.js`.
-
-#### Methods
-
-##### encoding()
-
-Returns the most preferred encoding from the client.
-
-##### encoding(availableEncodings)
-
-Returns the most preferred encoding from a list of available encodings.
-
-##### encodings()
-
-Returns an array of preferred encodings ordered by the client preference.
-
-##### encodings(availableEncodings)
-
-Returns an array of preferred encodings ordered by priority from a list of
-available encodings.
-
-## See Also
-
-The [accepts](https://npmjs.org/package/accepts#readme) module builds on
-this module and provides an alternative interface, mime type validation,
-and more.
-
-## License
-
-[MIT](LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/negotiator.svg
-[npm-url]: https://npmjs.org/package/negotiator
-[node-version-image]: https://img.shields.io/node/v/negotiator.svg
-[node-version-url]: https://nodejs.org/en/download/
-[coveralls-image]: https://img.shields.io/coveralls/jshttp/negotiator/master.svg
-[coveralls-url]: https://coveralls.io/r/jshttp/negotiator?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/negotiator.svg
-[downloads-url]: https://npmjs.org/package/negotiator
-[github-actions-ci-image]: https://img.shields.io/github/workflow/status/jshttp/negotiator/ci/master?label=ci
-[github-actions-ci-url]: https://github.com/jshttp/negotiator/actions/workflows/ci.yml
+***Node-core streams for userland***
+
+This package is a mirror of the Streams2 and Streams3 implementations in
+Node-core.
+
+Full documentation may be found on the [Node.js website](https://nodejs.org/dist/v8.17.0/docs/api/stream.html).
+
+If you want to guarantee a stable streams base, regardless of what version of
+Node you, or the users of your libraries are using, use **readable-stream** *only* and avoid the *"stream"* module in Node-core, for background see [this blogpost](http://r.va.gg/2014/06/why-i-dont-use-nodes-core-stream-module.html).
+
+As of version 2.0.0 **readable-stream** uses semantic versioning.
+
+# Streams Working Group
+
+`readable-stream` is maintained by the Streams Working Group, which
+oversees the development and maintenance of the Streams API within
+Node.js. The responsibilities of the Streams Working Group include:
+
+* Addressing stream issues on the Node.js issue tracker.
+* Authoring and editing stream documentation within the Node.js project.
+* Reviewing changes to stream subclasses within the Node.js project.
+* Redirecting changes to streams from the Node.js project to this
+  project.
+* Assisting in the implementation of stream providers within Node.js.
+* Recommending versions of `readable-stream` to be included in Node.js.
+* Messaging about the future of streams to give the community advance
+  notice of changes.
+
+<a name="members"></a>
+## Team Members
+
+* **Chris Dickinson** ([@chrisdickinson](https://github.com/chrisdickinson)) &lt;christopher.s.dickinson@gmail.com&gt;
+  - Release GPG key: 9554F04D7259F04124DE6B476D5A82AC7E37093B
+* **Calvin Metcalf** ([@calvinmetcalf](https://github.com/calvinmetcalf)) &lt;calvin.metcalf@gmail.com&gt;
+  - Release GPG key: F3EF5F62A87FC27A22E643F714CE4FF5015AA242
+* **Rod Vagg** ([@rvagg](https://github.com/rvagg)) &lt;rod@vagg.org&gt;
+  - Release GPG key: DD8F2338BAE7501E3DD5AC78C273792F7D83545D
+* **Sam Newman** ([@sonewman](https://github.com/sonewman)) &lt;newmansam@outlook.com&gt;
+* **Mathias Buus** ([@mafintosh](https://github.com/mafintosh)) &lt;mathiasbuus@gmail.com&gt;
+* **Domenic Denicola** ([@domenic](https://github.com/domenic)) &lt;d@domenic.me&gt;
+* **Matteo Collina** ([@mcollina](https://github.com/mcollina)) &lt;matteo.collina@gmail.com&gt;
+  - Release GPG key: 3ABC01543F22DD2239285CDD818674489FBC127E
+* **Irina Shestak** ([@lrlna](https://github.com/lrlna)) &lt;shestak.irina@gmail.com&gt;
