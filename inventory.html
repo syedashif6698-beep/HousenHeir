@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/style.css?v=3"><title>Inventory</title></head>
+<body data-nochat>
+<header class="site-header"><div class="wrap bar"><span class="brand-name">House &amp; Heir · Inventory</span><button class="linkbtn" id="out" type="button" hidden>Lock</button></div></header>
+<main><section><div class="wrap">
+  <div class="panel-box" id="login" hidden>
+    <h2>Inventory access</h2><p class="muted" style="margin:6px 0 18px">Enter the inventory password.</p>
+    <form id="lf" novalidate><div class="field"><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"></div>
+    <p class="msg" id="lm" role="alert"></p><button class="btn btn-block" type="submit">Open inventory</button></form>
+  </div>
+  <div id="panel" hidden></div>
+</div></section></main>
+<script src="/js/app.js?v=3" defer></script><script src="/js/inventory.js?v=3" defer></script>
+</body></html>
