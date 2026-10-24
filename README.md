@@ -1,16 +1,203 @@
-# Installation
-> `npm install --save @types/node`
+# negotiator
 
-# Summary
-This package contains type definitions for Node.js (https://nodejs.org/).
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Node.js Version][node-version-image]][node-version-url]
+[![Build Status][github-actions-ci-image]][github-actions-ci-url]
+[![Test Coverage][coveralls-image]][coveralls-url]
 
-# Details
-Files were exported from https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/node/v14.
+An HTTP content negotiator for Node.js
 
-### Additional Details
- * Last updated: Sat, 23 Sep 2023 20:38:33 GMT
- * Dependencies: none
- * Global values: `AbortController`, `AbortSignal`, `Buffer`, `__dirname`, `__filename`, `clearImmediate`, `clearInterval`, `clearTimeout`, `console`, `exports`, `global`, `module`, `process`, `queueMicrotask`, `require`, `setImmediate`, `setInterval`, `setTimeout`
+## Installation
 
-# Credits
-These definitions were written by [Microsoft TypeScript](https://github.com/Microsoft), [DefinitelyTyped](https://github.com/DefinitelyTyped), [Alberto Schiabel](https://github.com/jkomyno), [Alvis HT Tang](https://github.com/alvis), [Andrew Makarov](https://github.com/r3nya), [Benjamin Toueg](https://github.com/btoueg), [Chigozirim C.](https://github.com/smac89), [David Junger](https://github.com/touffy), [Deividas Bakanas](https://github.com/DeividasBakanas), [Eugene Y. Q. Shen](https://github.com/eyqs), [Hannes Magnusson](https://github.com/Hannes-Magnusson-CK), [Hoàng Văn Khải](https://github.com/KSXGitHub), [Huw](https://github.com/hoo29), [Kelvin Jin](https://github.com/kjin), [Klaus Meinhardt](https://github.com/ajafff), [Lishude](https://github.com/islishude), [Mariusz Wiktorczyk](https://github.com/mwiktorczyk), [Mohsen Azimi](https://github.com/mohsen1), [Nicolas Even](https://github.com/n-e), [Nikita Galkin](https://github.com/galkin), [Parambir Singh](https://github.com/parambirs), [Sebastian Silbermann](https://github.com/eps1lon), [Seth Westphal](https://github.com/westy92), [Simon Schick](https://github.com/SimonSchick), [Thomas den Hollander](https://github.com/ThomasdenH), [Wilco Bakker](https://github.com/WilcoBakker), [wwwy3y3](https://github.com/wwwy3y3), [Samuel Ainsworth](https://github.com/samuela), [Kyle Uehlein](https://github.com/kuehlein), [Thanik Bhongbhibhat](https://github.com/bhongy), [Marcin Kopacz](https://github.com/chyzwar), [Trivikram Kamat](https://github.com/trivikr), [Junxiao Shi](https://github.com/yoursunny), [Ilia Baryshnikov](https://github.com/qwelias), [ExE Boss](https://github.com/ExE-Boss), [Piotr Błażejewicz](https://github.com/peterblazejewicz), [Anna Henningsen](https://github.com/addaleax), [Victor Perin](https://github.com/victorperin), [Yongsheng Zhang](https://github.com/ZYSzys), [Bond](https://github.com/bondz), and [Linus Unnebäck](https://github.com/LinusU).
+```sh
+$ npm install negotiator
+```
+
+## API
+
+```js
+var Negotiator = require('negotiator')
+```
+
+### Accept Negotiation
+
+```js
+availableMediaTypes = ['text/html', 'text/plain', 'application/json']
+
+// The negotiator constructor receives a request object
+negotiator = new Negotiator(request)
+
+// Let's say Accept header is 'text/html, application/*;q=0.2, image/jpeg;q=0.8'
+
+negotiator.mediaTypes()
+// -> ['text/html', 'image/jpeg', 'application/*']
+
+negotiator.mediaTypes(availableMediaTypes)
+// -> ['text/html', 'application/json']
+
+negotiator.mediaType(availableMediaTypes)
+// -> 'text/html'
+```
+
+You can check a working example at `examples/accept.js`.
+
+#### Methods
+
+##### mediaType()
+
+Returns the most preferred media type from the client.
+
+##### mediaType(availableMediaType)
+
+Returns the most preferred media type from a list of available media types.
+
+##### mediaTypes()
+
+Returns an array of preferred media types ordered by the client preference.
+
+##### mediaTypes(availableMediaTypes)
+
+Returns an array of preferred media types ordered by priority from a list of
+available media types.
+
+### Accept-Language Negotiation
+
+```js
+negotiator = new Negotiator(request)
+
+availableLanguages = ['en', 'es', 'fr']
+
+// Let's say Accept-Language header is 'en;q=0.8, es, pt'
+
+negotiator.languages()
+// -> ['es', 'pt', 'en']
+
+negotiator.languages(availableLanguages)
+// -> ['es', 'en']
+
+language = negotiator.language(availableLanguages)
+// -> 'es'
+```
+
+You can check a working example at `examples/language.js`.
+
+#### Methods
+
+##### language()
+
+Returns the most preferred language from the client.
+
+##### language(availableLanguages)
+
+Returns the most preferred language from a list of available languages.
+
+##### languages()
+
+Returns an array of preferred languages ordered by the client preference.
+
+##### languages(availableLanguages)
+
+Returns an array of preferred languages ordered by priority from a list of
+available languages.
+
+### Accept-Charset Negotiation
+
+```js
+availableCharsets = ['utf-8', 'iso-8859-1', 'iso-8859-5']
+
+negotiator = new Negotiator(request)
+
+// Let's say Accept-Charset header is 'utf-8, iso-8859-1;q=0.8, utf-7;q=0.2'
+
+negotiator.charsets()
+// -> ['utf-8', 'iso-8859-1', 'utf-7']
+
+negotiator.charsets(availableCharsets)
+// -> ['utf-8', 'iso-8859-1']
+
+negotiator.charset(availableCharsets)
+// -> 'utf-8'
+```
+
+You can check a working example at `examples/charset.js`.
+
+#### Methods
+
+##### charset()
+
+Returns the most preferred charset from the client.
+
+##### charset(availableCharsets)
+
+Returns the most preferred charset from a list of available charsets.
+
+##### charsets()
+
+Returns an array of preferred charsets ordered by the client preference.
+
+##### charsets(availableCharsets)
+
+Returns an array of preferred charsets ordered by priority from a list of
+available charsets.
+
+### Accept-Encoding Negotiation
+
+```js
+availableEncodings = ['identity', 'gzip']
+
+negotiator = new Negotiator(request)
+
+// Let's say Accept-Encoding header is 'gzip, compress;q=0.2, identity;q=0.5'
+
+negotiator.encodings()
+// -> ['gzip', 'identity', 'compress']
+
+negotiator.encodings(availableEncodings)
+// -> ['gzip', 'identity']
+
+negotiator.encoding(availableEncodings)
+// -> 'gzip'
+```
+
+You can check a working example at `examples/encoding.js`.
+
+#### Methods
+
+##### encoding()
+
+Returns the most preferred encoding from the client.
+
+##### encoding(availableEncodings)
+
+Returns the most preferred encoding from a list of available encodings.
+
+##### encodings()
+
+Returns an array of preferred encodings ordered by the client preference.
+
+##### encodings(availableEncodings)
+
+Returns an array of preferred encodings ordered by priority from a list of
+available encodings.
+
+## See Also
+
+The [accepts](https://npmjs.org/package/accepts#readme) module builds on
+this module and provides an alternative interface, mime type validation,
+and more.
+
+## License
+
+[MIT](LICENSE)
+
+[npm-image]: https://img.shields.io/npm/v/negotiator.svg
+[npm-url]: https://npmjs.org/package/negotiator
+[node-version-image]: https://img.shields.io/node/v/negotiator.svg
+[node-version-url]: https://nodejs.org/en/download/
+[coveralls-image]: https://img.shields.io/coveralls/jshttp/negotiator/master.svg
+[coveralls-url]: https://coveralls.io/r/jshttp/negotiator?branch=master
+[downloads-image]: https://img.shields.io/npm/dm/negotiator.svg
+[downloads-url]: https://npmjs.org/package/negotiator
+[github-actions-ci-image]: https://img.shields.io/github/workflow/status/jshttp/negotiator/ci/master?label=ci
+[github-actions-ci-url]: https://github.com/jshttp/negotiator/actions/workflows/ci.yml

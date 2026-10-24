@@ -1,68 +1,82 @@
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
+/*!
+ * negotiator
+ * Copyright(c) 2012 Federico Romero
+ * Copyright(c) 2012-2014 Isaac Z. Schlueter
+ * Copyright(c) 2015 Douglas Christopher Wilson
+ * MIT Licensed
+ */
+
+'use strict';
+
+var preferredCharsets = require('./lib/charset')
+var preferredEncodings = require('./lib/encoding')
+var preferredLanguages = require('./lib/language')
+var preferredMediaTypes = require('./lib/mediaType')
+
+/**
+ * Module exports.
+ * @public
+ */
+
+module.exports = Negotiator;
+module.exports.Negotiator = Negotiator;
+
+/**
+ * Create a Negotiator instance from a request.
+ * @param {object} request
+ * @public
+ */
+
+function Negotiator(request) {
+  if (!(this instanceof Negotiator)) {
+    return new Negotiator(request);
+  }
+
+  this.request = request;
+}
+
+Negotiator.prototype.charset = function charset(available) {
+  var set = this.charsets(available);
+  return set && set[0];
 };
-var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+
+Negotiator.prototype.charsets = function charsets(available) {
+  return preferredCharsets(this.request.headers['accept-charset'], available);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.writeToPath = exports.writeToString = exports.writeToBuffer = exports.writeToStream = exports.write = exports.format = exports.FormatterOptions = exports.CsvFormatterStream = void 0;
-const util_1 = require("util");
-const stream_1 = require("stream");
-const fs = __importStar(require("fs"));
-const FormatterOptions_1 = require("./FormatterOptions");
-const CsvFormatterStream_1 = require("./CsvFormatterStream");
-__exportStar(require("./types"), exports);
-var CsvFormatterStream_2 = require("./CsvFormatterStream");
-Object.defineProperty(exports, "CsvFormatterStream", { enumerable: true, get: function () { return CsvFormatterStream_2.CsvFormatterStream; } });
-var FormatterOptions_2 = require("./FormatterOptions");
-Object.defineProperty(exports, "FormatterOptions", { enumerable: true, get: function () { return FormatterOptions_2.FormatterOptions; } });
-exports.format = (options) => new CsvFormatterStream_1.CsvFormatterStream(new FormatterOptions_1.FormatterOptions(options));
-exports.write = (rows, options) => {
-    const csvStream = exports.format(options);
-    const promiseWrite = util_1.promisify((row, cb) => {
-        csvStream.write(row, undefined, cb);
-    });
-    rows.reduce((prev, row) => prev.then(() => promiseWrite(row)), Promise.resolve())
-        .then(() => csvStream.end())
-        .catch((err) => {
-        csvStream.emit('error', err);
-    });
-    return csvStream;
+
+Negotiator.prototype.encoding = function encoding(available) {
+  var set = this.encodings(available);
+  return set && set[0];
 };
-exports.writeToStream = (ws, rows, options) => exports.write(rows, options).pipe(ws);
-exports.writeToBuffer = (rows, opts = {}) => {
-    const buffers = [];
-    const ws = new stream_1.Writable({
-        write(data, enc, writeCb) {
-            buffers.push(data);
-            writeCb();
-        },
-    });
-    return new Promise((res, rej) => {
-        ws.on('error', rej).on('finish', () => res(Buffer.concat(buffers)));
-        exports.write(rows, opts).pipe(ws);
-    });
+
+Negotiator.prototype.encodings = function encodings(available) {
+  return preferredEncodings(this.request.headers['accept-encoding'], available);
 };
-exports.writeToString = (rows, options) => exports.writeToBuffer(rows, options).then((buffer) => buffer.toString());
-exports.writeToPath = (path, rows, options) => {
-    const stream = fs.createWriteStream(path, { encoding: 'utf8' });
-    return exports.write(rows, options).pipe(stream);
+
+Negotiator.prototype.language = function language(available) {
+  var set = this.languages(available);
+  return set && set[0];
 };
-//# sourceMappingURL=index.js.map
+
+Negotiator.prototype.languages = function languages(available) {
+  return preferredLanguages(this.request.headers['accept-language'], available);
+};
+
+Negotiator.prototype.mediaType = function mediaType(available) {
+  var set = this.mediaTypes(available);
+  return set && set[0];
+};
+
+Negotiator.prototype.mediaTypes = function mediaTypes(available) {
+  return preferredMediaTypes(this.request.headers.accept, available);
+};
+
+// Backwards compatibility
+Negotiator.prototype.preferredCharset = Negotiator.prototype.charset;
+Negotiator.prototype.preferredCharsets = Negotiator.prototype.charsets;
+Negotiator.prototype.preferredEncoding = Negotiator.prototype.encoding;
+Negotiator.prototype.preferredEncodings = Negotiator.prototype.encodings;
+Negotiator.prototype.preferredLanguage = Negotiator.prototype.language;
+Negotiator.prototype.preferredLanguages = Negotiator.prototype.languages;
+Negotiator.prototype.preferredMediaType = Negotiator.prototype.mediaType;
+Negotiator.prototype.preferredMediaTypes = Negotiator.prototype.mediaTypes;
